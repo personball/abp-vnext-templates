@@ -4,15 +4,27 @@ $OutputEncoding = [Text.UTF8Encoding]::UTF8
 # company name placeholder 
 $oldCompanyName="CName"
 # your company name
-$newCompanyName="Lumi"
+$newCompanyName="YCompany"
 
 # project name placeholder
 $oldProjectName="PName"
 # your project name
-$newProjectName="PT"
+$newProjectName="YProject"
 
 $oldServiceName="SName"
-$newServiceName="PM"
+$newServiceName="YService"
+
+if ($args.Length -gt 0) {
+    $newCompanyName = $args[0]
+}
+
+if ($args.Length -gt 1) {
+    $newProjectName = $args[1]
+}
+
+if ($args.Length -gt 2) {
+    $newServiceName = $args[2]
+}
 
 # file type
 $fileType="FileInfo"
@@ -82,3 +94,4 @@ function Rename {
 
 Rename -TargetFolder $slnFolder -PlaceHolderCompanyName $oldCompanyName -PlaceHolderProjectName $oldProjectName -PlaceHolderServiceName $oldServiceName -NewCompanyName $newCompanyName -NewProjectName $newProjectName -NewServiceName $newServiceName
 
+dotnet restore "$slnFolder$newRoot.sln"
