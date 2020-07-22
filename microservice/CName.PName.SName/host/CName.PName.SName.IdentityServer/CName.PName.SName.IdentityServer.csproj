@@ -29,10 +29,10 @@
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.Autofac" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="3.0.4" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.Account.Application" Version="3.0.4" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="3.0.4" />
     <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="3.0.4" />
@@ -57,6 +57,11 @@
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200624023331_Initial.cs" />
+    <Compile Remove="Migrations\20200624023331_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace CName.PName.SName.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<IdentityServerHostMigrationsDbContext>()
-                .UseSqlServer(configuration.GetConnectionString("Default"));
+                .UseNpgsql(configuration.GetConnectionString("Default"));
 
             return new IdentityServerHostMigrationsDbContext(builder.Options);
         }
