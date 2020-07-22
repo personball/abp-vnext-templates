@@ -5,7 +5,7 @@ project templates for abp vnext
 
 1. use `abp new CName.PName.SName -t module --tiered --no-ui` as init project.
 1. replace all `Volo.Abp.EntityFrameworkCore.SqlServer` with `Volo.Abp.EntityFrameworkCore.PostgreSql` and rebuild `Migrations`.
-1. fix all build issues
+1. fix all build issues.
 
 # how
 
