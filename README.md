@@ -8,6 +8,9 @@ project templates for abp vnext
 1. update *ConnectionStrings* in appSettings.json and fix all build errors.
 1. add StyleCop Support (custom rules in StyleCop.ruleset).
 1. fix all build warnings.
+1. Create ConventionalControllers(webapi) for `SNameApplicationModule`.
+1. make `SNameHttpApiHostMigrationsDbContext` implements `ISNameDbContext` to avoid [table name pluralization problem](https://stackoverflow.com/questions/37493095/entity-framework-core-rc2-table-name-pluralization).
+1. Use `SnakeCaseNamingConvention` for postgreSql table names and column names.
 
 # how
 
