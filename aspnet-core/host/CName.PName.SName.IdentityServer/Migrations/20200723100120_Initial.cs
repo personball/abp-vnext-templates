@@ -11,17 +11,17 @@ namespace CName.PName.SName.Migrations
                 name: "AbpAuditLogs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     ApplicationName = table.Column<string>(maxLength: 96, nullable: true),
                     UserId = table.Column<Guid>(nullable: true),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     TenantId = table.Column<Guid>(nullable: true),
-                    TenantName = table.Column<string>(nullable: true),
+                    tenant_name = table.Column<string>(nullable: true),
                     ImpersonatorUserId = table.Column<Guid>(nullable: true),
                     ImpersonatorTenantId = table.Column<Guid>(nullable: true),
-                    ExecutionTime = table.Column<DateTime>(nullable: false),
+                    execution_time = table.Column<DateTime>(nullable: false),
                     ExecutionDuration = table.Column<int>(nullable: false),
                     ClientIpAddress = table.Column<string>(maxLength: 64, nullable: true),
                     ClientName = table.Column<string>(maxLength: 128, nullable: true),
@@ -36,34 +36,34 @@ namespace CName.PName.SName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpAuditLogs", x => x.Id);
+                    table.PrimaryKey("pk_audit_log", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpClaimTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
-                    Name = table.Column<string>(maxLength: 256, nullable: false),
-                    Required = table.Column<bool>(nullable: false),
-                    IsStatic = table.Column<bool>(nullable: false),
-                    Regex = table.Column<string>(maxLength: 512, nullable: true),
-                    RegexDescription = table.Column<string>(maxLength: 128, nullable: true),
-                    Description = table.Column<string>(maxLength: 256, nullable: true),
-                    ValueType = table.Column<int>(nullable: false)
+                    name = table.Column<string>(maxLength: 256, nullable: false),
+                    required = table.Column<bool>(nullable: false),
+                    is_static = table.Column<bool>(nullable: false),
+                    regex = table.Column<string>(maxLength: 512, nullable: true),
+                    regex_description = table.Column<string>(maxLength: 128, nullable: true),
+                    description = table.Column<string>(maxLength: 256, nullable: true),
+                    value_type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpClaimTypes", x => x.Id);
+                    table.PrimaryKey("pk_identity_claim_type", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpOrganizationUnits",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
@@ -74,18 +74,18 @@ namespace CName.PName.SName.Migrations
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
                     TenantId = table.Column<Guid>(nullable: true),
-                    ParentId = table.Column<Guid>(nullable: true),
+                    parent_id = table.Column<Guid>(nullable: true),
                     Code = table.Column<string>(maxLength: 95, nullable: false),
                     DisplayName = table.Column<string>(maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpOrganizationUnits", x => x.Id);
+                    table.PrimaryKey("pk_organization_unit", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AbpOrganizationUnits_AbpOrganizationUnits_ParentId",
-                        column: x => x.ParentId,
+                        name: "fk_abp_organization_units_abp_organization_units_organization_unit",
+                        column: x => x.parent_id,
                         principalTable: "AbpOrganizationUnits",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -93,56 +93,56 @@ namespace CName.PName.SName.Migrations
                 name: "AbpPermissionGrants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(maxLength: 64, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 64, nullable: false)
+                    name = table.Column<string>(maxLength: 128, nullable: false),
+                    provider_name = table.Column<string>(maxLength: 64, nullable: false),
+                    provider_key = table.Column<string>(maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpPermissionGrants", x => x.Id);
+                    table.PrimaryKey("pk_permission_grant", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpRoles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     TenantId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(maxLength: 256, nullable: false),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: false),
+                    name = table.Column<string>(maxLength: 256, nullable: false),
+                    normalized_name = table.Column<string>(maxLength: 256, nullable: false),
                     IsDefault = table.Column<bool>(nullable: false),
                     IsStatic = table.Column<bool>(nullable: false),
                     IsPublic = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpRoles", x => x.Id);
+                    table.PrimaryKey("pk_identity_role", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpSettings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
-                    Value = table.Column<string>(maxLength: 2048, nullable: false),
-                    ProviderName = table.Column<string>(maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(maxLength: 64, nullable: true)
+                    id = table.Column<Guid>(nullable: false),
+                    name = table.Column<string>(maxLength: 128, nullable: false),
+                    value = table.Column<string>(maxLength: 2048, nullable: false),
+                    provider_name = table.Column<string>(maxLength: 64, nullable: true),
+                    provider_key = table.Column<string>(maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpSettings", x => x.Id);
+                    table.PrimaryKey("pk_setting", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpTenants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
@@ -152,18 +152,18 @@ namespace CName.PName.SName.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 64, nullable: false)
+                    name = table.Column<string>(maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpTenants", x => x.Id);
+                    table.PrimaryKey("pk_tenant", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
@@ -186,20 +186,20 @@ namespace CName.PName.SName.Migrations
                     PhoneNumber = table.Column<string>(maxLength: 16, nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false, defaultValue: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false, defaultValue: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    lockout_end = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false, defaultValue: false),
                     AccessFailedCount = table.Column<int>(nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpUsers", x => x.Id);
+                    table.PrimaryKey("pk_identity_user", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IdentityServerApiResources",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
@@ -209,22 +209,22 @@ namespace CName.PName.SName.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    DisplayName = table.Column<string>(maxLength: 200, nullable: true),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Enabled = table.Column<bool>(nullable: false),
-                    Properties = table.Column<string>(nullable: true)
+                    name = table.Column<string>(maxLength: 200, nullable: false),
+                    display_name = table.Column<string>(maxLength: 200, nullable: true),
+                    description = table.Column<string>(maxLength: 1000, nullable: true),
+                    enabled = table.Column<bool>(nullable: false),
+                    properties = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerApiResources", x => x.Id);
+                    table.PrimaryKey("pk_api_resource", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IdentityServerClients",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
@@ -234,75 +234,75 @@ namespace CName.PName.SName.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
-                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
-                    ClientName = table.Column<string>(maxLength: 200, nullable: true),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    ClientUri = table.Column<string>(maxLength: 2000, nullable: true),
-                    LogoUri = table.Column<string>(maxLength: 2000, nullable: true),
-                    Enabled = table.Column<bool>(nullable: false),
-                    ProtocolType = table.Column<string>(maxLength: 200, nullable: false),
-                    RequireClientSecret = table.Column<bool>(nullable: false),
-                    RequireConsent = table.Column<bool>(nullable: false),
-                    AllowRememberConsent = table.Column<bool>(nullable: false),
-                    AlwaysIncludeUserClaimsInIdToken = table.Column<bool>(nullable: false),
-                    RequirePkce = table.Column<bool>(nullable: false),
-                    AllowPlainTextPkce = table.Column<bool>(nullable: false),
-                    AllowAccessTokensViaBrowser = table.Column<bool>(nullable: false),
-                    FrontChannelLogoutUri = table.Column<string>(maxLength: 2000, nullable: true),
-                    FrontChannelLogoutSessionRequired = table.Column<bool>(nullable: false),
-                    BackChannelLogoutUri = table.Column<string>(maxLength: 2000, nullable: true),
-                    BackChannelLogoutSessionRequired = table.Column<bool>(nullable: false),
-                    AllowOfflineAccess = table.Column<bool>(nullable: false),
-                    IdentityTokenLifetime = table.Column<int>(nullable: false),
-                    AccessTokenLifetime = table.Column<int>(nullable: false),
-                    AuthorizationCodeLifetime = table.Column<int>(nullable: false),
-                    ConsentLifetime = table.Column<int>(nullable: true),
-                    AbsoluteRefreshTokenLifetime = table.Column<int>(nullable: false),
-                    SlidingRefreshTokenLifetime = table.Column<int>(nullable: false),
-                    RefreshTokenUsage = table.Column<int>(nullable: false),
-                    UpdateAccessTokenClaimsOnRefresh = table.Column<bool>(nullable: false),
-                    RefreshTokenExpiration = table.Column<int>(nullable: false),
-                    AccessTokenType = table.Column<int>(nullable: false),
-                    EnableLocalLogin = table.Column<bool>(nullable: false),
-                    IncludeJwtId = table.Column<bool>(nullable: false),
-                    AlwaysSendClientClaims = table.Column<bool>(nullable: false),
-                    ClientClaimsPrefix = table.Column<string>(maxLength: 200, nullable: true),
-                    PairWiseSubjectSalt = table.Column<string>(maxLength: 200, nullable: true),
-                    UserSsoLifetime = table.Column<int>(nullable: true),
-                    UserCodeType = table.Column<string>(maxLength: 100, nullable: true),
-                    DeviceCodeLifetime = table.Column<int>(nullable: false)
+                    client_id = table.Column<string>(maxLength: 200, nullable: false),
+                    client_name = table.Column<string>(maxLength: 200, nullable: true),
+                    description = table.Column<string>(maxLength: 1000, nullable: true),
+                    client_uri = table.Column<string>(maxLength: 2000, nullable: true),
+                    logo_uri = table.Column<string>(maxLength: 2000, nullable: true),
+                    enabled = table.Column<bool>(nullable: false),
+                    protocol_type = table.Column<string>(maxLength: 200, nullable: false),
+                    require_client_secret = table.Column<bool>(nullable: false),
+                    require_consent = table.Column<bool>(nullable: false),
+                    allow_remember_consent = table.Column<bool>(nullable: false),
+                    always_include_user_claims_in_id_token = table.Column<bool>(nullable: false),
+                    require_pkce = table.Column<bool>(nullable: false),
+                    allow_plain_text_pkce = table.Column<bool>(nullable: false),
+                    allow_access_tokens_via_browser = table.Column<bool>(nullable: false),
+                    front_channel_logout_uri = table.Column<string>(maxLength: 2000, nullable: true),
+                    front_channel_logout_session_required = table.Column<bool>(nullable: false),
+                    back_channel_logout_uri = table.Column<string>(maxLength: 2000, nullable: true),
+                    back_channel_logout_session_required = table.Column<bool>(nullable: false),
+                    allow_offline_access = table.Column<bool>(nullable: false),
+                    identity_token_lifetime = table.Column<int>(nullable: false),
+                    access_token_lifetime = table.Column<int>(nullable: false),
+                    authorization_code_lifetime = table.Column<int>(nullable: false),
+                    consent_lifetime = table.Column<int>(nullable: true),
+                    absolute_refresh_token_lifetime = table.Column<int>(nullable: false),
+                    sliding_refresh_token_lifetime = table.Column<int>(nullable: false),
+                    refresh_token_usage = table.Column<int>(nullable: false),
+                    update_access_token_claims_on_refresh = table.Column<bool>(nullable: false),
+                    refresh_token_expiration = table.Column<int>(nullable: false),
+                    access_token_type = table.Column<int>(nullable: false),
+                    enable_local_login = table.Column<bool>(nullable: false),
+                    include_jwt_id = table.Column<bool>(nullable: false),
+                    always_send_client_claims = table.Column<bool>(nullable: false),
+                    client_claims_prefix = table.Column<string>(maxLength: 200, nullable: true),
+                    pair_wise_subject_salt = table.Column<string>(maxLength: 200, nullable: true),
+                    user_sso_lifetime = table.Column<int>(nullable: true),
+                    user_code_type = table.Column<string>(maxLength: 100, nullable: true),
+                    device_code_lifetime = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClients", x => x.Id);
+                    table.PrimaryKey("pk_client", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IdentityServerDeviceFlowCodes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<Guid>(nullable: true),
-                    DeviceCode = table.Column<string>(maxLength: 200, nullable: false),
-                    UserCode = table.Column<string>(maxLength: 200, nullable: false),
-                    SubjectId = table.Column<string>(maxLength: 200, nullable: true),
-                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
-                    Expiration = table.Column<DateTime>(nullable: false),
-                    Data = table.Column<string>(maxLength: 50000, nullable: false)
+                    device_code = table.Column<string>(maxLength: 200, nullable: false),
+                    user_code = table.Column<string>(maxLength: 200, nullable: false),
+                    subject_id = table.Column<string>(maxLength: 200, nullable: true),
+                    client_id = table.Column<string>(maxLength: 200, nullable: false),
+                    expiration = table.Column<DateTime>(nullable: false),
+                    data = table.Column<string>(maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerDeviceFlowCodes", x => x.Id);
+                    table.PrimaryKey("pk_device_flow_codes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IdentityServerIdentityResources",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(nullable: false),
@@ -312,45 +312,45 @@ namespace CName.PName.SName.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    DisplayName = table.Column<string>(maxLength: 200, nullable: true),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Enabled = table.Column<bool>(nullable: false),
-                    Required = table.Column<bool>(nullable: false),
-                    Emphasize = table.Column<bool>(nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(nullable: false),
-                    Properties = table.Column<string>(nullable: true)
+                    name = table.Column<string>(maxLength: 200, nullable: false),
+                    display_name = table.Column<string>(maxLength: 200, nullable: true),
+                    description = table.Column<string>(maxLength: 1000, nullable: true),
+                    enabled = table.Column<bool>(nullable: false),
+                    required = table.Column<bool>(nullable: false),
+                    emphasize = table.Column<bool>(nullable: false),
+                    show_in_discovery_document = table.Column<bool>(nullable: false),
+                    properties = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerIdentityResources", x => x.Id);
+                    table.PrimaryKey("pk_identity_resource", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IdentityServerPersistedGrants",
                 columns: table => new
                 {
-                    Key = table.Column<string>(maxLength: 200, nullable: false),
-                    Id = table.Column<Guid>(nullable: false),
+                    key = table.Column<string>(maxLength: 200, nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
-                    Type = table.Column<string>(maxLength: 50, nullable: false),
-                    SubjectId = table.Column<string>(maxLength: 200, nullable: true),
-                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
-                    CreationTime = table.Column<DateTime>(nullable: false),
-                    Expiration = table.Column<DateTime>(nullable: true),
-                    Data = table.Column<string>(maxLength: 50000, nullable: false)
+                    type = table.Column<string>(maxLength: 50, nullable: false),
+                    subject_id = table.Column<string>(maxLength: 200, nullable: true),
+                    client_id = table.Column<string>(maxLength: 200, nullable: false),
+                    creation_time = table.Column<DateTime>(nullable: false),
+                    expiration = table.Column<DateTime>(nullable: true),
+                    data = table.Column<string>(maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerPersistedGrants", x => x.Key);
+                    table.PrimaryKey("pk_identity_server_persisted_grants", x => x.key);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AbpAuditLogActions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
                     AuditLogId = table.Column<Guid>(nullable: false),
                     ServiceName = table.Column<string>(maxLength: 256, nullable: true),
@@ -362,12 +362,12 @@ namespace CName.PName.SName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpAuditLogActions", x => x.Id);
+                    table.PrimaryKey("pk_audit_log_action", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AbpAuditLogActions_AbpAuditLogs_AuditLogId",
+                        name: "fk_audit_log_action_audit_log_audit_log_id",
                         column: x => x.AuditLogId,
                         principalTable: "AbpAuditLogs",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -375,24 +375,24 @@ namespace CName.PName.SName.Migrations
                 name: "AbpEntityChanges",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     AuditLogId = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
                     ChangeTime = table.Column<DateTime>(nullable: false),
                     ChangeType = table.Column<byte>(nullable: false),
-                    EntityTenantId = table.Column<Guid>(nullable: true),
+                    entity_tenant_id = table.Column<Guid>(nullable: true),
                     EntityId = table.Column<string>(maxLength: 128, nullable: false),
                     EntityTypeFullName = table.Column<string>(maxLength: 128, nullable: false),
                     ExtraProperties = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpEntityChanges", x => x.Id);
+                    table.PrimaryKey("pk_entity_change", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AbpEntityChanges_AbpAuditLogs_AuditLogId",
+                        name: "fk_entity_change_audit_log_audit_log_id",
                         column: x => x.AuditLogId,
                         principalTable: "AbpAuditLogs",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -400,26 +400,26 @@ namespace CName.PName.SName.Migrations
                 name: "AbpOrganizationUnitRoles",
                 columns: table => new
                 {
-                    RoleId = table.Column<Guid>(nullable: false),
-                    OrganizationUnitId = table.Column<Guid>(nullable: false),
+                    role_id = table.Column<Guid>(nullable: false),
+                    organization_unit_id = table.Column<Guid>(nullable: false),
                     CreationTime = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<Guid>(nullable: true),
                     TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpOrganizationUnitRoles", x => new { x.OrganizationUnitId, x.RoleId });
+                    table.PrimaryKey("pk_abp_organization_unit_roles", x => new { x.organization_unit_id, x.role_id });
                     table.ForeignKey(
-                        name: "FK_AbpOrganizationUnitRoles_AbpOrganizationUnits_OrganizationU~",
-                        column: x => x.OrganizationUnitId,
+                        name: "fk_organization_unit_role_organization_unit_organization_unit_id",
+                        column: x => x.organization_unit_id,
                         principalTable: "AbpOrganizationUnits",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AbpOrganizationUnitRoles_AbpRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "fk_abp_organization_unit_roles_abp_roles_identity_role_id",
+                        column: x => x.role_id,
                         principalTable: "AbpRoles",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -427,20 +427,20 @@ namespace CName.PName.SName.Migrations
                 name: "AbpRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
-                    ClaimType = table.Column<string>(maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(maxLength: 1024, nullable: true),
-                    RoleId = table.Column<Guid>(nullable: false)
+                    claim_type = table.Column<string>(maxLength: 256, nullable: false),
+                    claim_value = table.Column<string>(maxLength: 1024, nullable: true),
+                    role_id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpRoleClaims", x => x.Id);
+                    table.PrimaryKey("pk_identity_role_claim", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AbpRoleClaims_AbpRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "fk_identity_role_claim_identity_role_identity_role_id",
+                        column: x => x.role_id,
                         principalTable: "AbpRoles",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -448,18 +448,18 @@ namespace CName.PName.SName.Migrations
                 name: "AbpTenantConnectionStrings",
                 columns: table => new
                 {
-                    TenantId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 64, nullable: false),
-                    Value = table.Column<string>(maxLength: 1024, nullable: false)
+                    tenant_id = table.Column<Guid>(nullable: false),
+                    name = table.Column<string>(maxLength: 64, nullable: false),
+                    value = table.Column<string>(maxLength: 1024, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpTenantConnectionStrings", x => new { x.TenantId, x.Name });
+                    table.PrimaryKey("pk_abp_tenant_connection_strings", x => new { x.tenant_id, x.name });
                     table.ForeignKey(
-                        name: "FK_AbpTenantConnectionStrings_AbpTenants_TenantId",
-                        column: x => x.TenantId,
+                        name: "fk_tenant_connection_string_tenant_tenant_id",
+                        column: x => x.tenant_id,
                         principalTable: "AbpTenants",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -467,20 +467,20 @@ namespace CName.PName.SName.Migrations
                 name: "AbpUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
-                    ClaimType = table.Column<string>(maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(maxLength: 1024, nullable: true),
-                    UserId = table.Column<Guid>(nullable: false)
+                    claim_type = table.Column<string>(maxLength: 256, nullable: false),
+                    claim_value = table.Column<string>(maxLength: 1024, nullable: true),
+                    user_id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpUserClaims", x => x.Id);
+                    table.PrimaryKey("pk_identity_user_claim", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AbpUserClaims_AbpUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_identity_user_claim_identity_user_identity_user_id",
+                        column: x => x.user_id,
                         principalTable: "AbpUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -488,20 +488,20 @@ namespace CName.PName.SName.Migrations
                 name: "AbpUserLogins",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 64, nullable: false),
+                    user_id = table.Column<Guid>(nullable: false),
+                    login_provider = table.Column<string>(maxLength: 64, nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
-                    ProviderKey = table.Column<string>(maxLength: 196, nullable: false),
-                    ProviderDisplayName = table.Column<string>(maxLength: 128, nullable: true)
+                    provider_key = table.Column<string>(maxLength: 196, nullable: false),
+                    provider_display_name = table.Column<string>(maxLength: 128, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpUserLogins", x => new { x.UserId, x.LoginProvider });
+                    table.PrimaryKey("pk_abp_user_logins", x => new { x.user_id, x.login_provider });
                     table.ForeignKey(
-                        name: "FK_AbpUserLogins_AbpUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_identity_user_login_identity_user_identity_user_id",
+                        column: x => x.user_id,
                         principalTable: "AbpUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -509,26 +509,26 @@ namespace CName.PName.SName.Migrations
                 name: "AbpUserOrganizationUnits",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    OrganizationUnitId = table.Column<Guid>(nullable: false),
+                    user_id = table.Column<Guid>(nullable: false),
+                    organization_unit_id = table.Column<Guid>(nullable: false),
                     CreationTime = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<Guid>(nullable: true),
                     TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpUserOrganizationUnits", x => new { x.OrganizationUnitId, x.UserId });
+                    table.PrimaryKey("pk_abp_user_organization_units", x => new { x.organization_unit_id, x.user_id });
                     table.ForeignKey(
-                        name: "FK_AbpUserOrganizationUnits_AbpOrganizationUnits_OrganizationU~",
-                        column: x => x.OrganizationUnitId,
+                        name: "fk_abp_user_organization_units_abp_organization_units_organization_",
+                        column: x => x.organization_unit_id,
                         principalTable: "AbpOrganizationUnits",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AbpUserOrganizationUnits_AbpUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_identity_user_organization_unit_identity_user_identity_user",
+                        column: x => x.user_id,
                         principalTable: "AbpUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -536,24 +536,24 @@ namespace CName.PName.SName.Migrations
                 name: "AbpUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    RoleId = table.Column<Guid>(nullable: false),
+                    user_id = table.Column<Guid>(nullable: false),
+                    role_id = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("pk_abp_user_roles", x => new { x.user_id, x.role_id });
                     table.ForeignKey(
-                        name: "FK_AbpUserRoles_AbpRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "fk_abp_user_roles_identity_role_identity_role_id",
+                        column: x => x.role_id,
                         principalTable: "AbpRoles",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AbpUserRoles_AbpUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_identity_user_role_identity_user_identity_user_id",
+                        column: x => x.user_id,
                         principalTable: "AbpUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -561,20 +561,20 @@ namespace CName.PName.SName.Migrations
                 name: "AbpUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 64, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    user_id = table.Column<Guid>(nullable: false),
+                    login_provider = table.Column<string>(maxLength: 64, nullable: false),
+                    name = table.Column<string>(maxLength: 128, nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
+                    value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("pk_abp_user_tokens", x => new { x.user_id, x.login_provider, x.name });
                     table.ForeignKey(
-                        name: "FK_AbpUserTokens_AbpUsers_UserId",
-                        column: x => x.UserId,
+                        name: "fk_identity_user_token_identity_user_identity_user_id",
+                        column: x => x.user_id,
                         principalTable: "AbpUsers",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -582,17 +582,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerApiClaims",
                 columns: table => new
                 {
-                    Type = table.Column<string>(maxLength: 200, nullable: false),
-                    ApiResourceId = table.Column<Guid>(nullable: false)
+                    type = table.Column<string>(maxLength: 200, nullable: false),
+                    api_resource_id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerApiClaims", x => new { x.ApiResourceId, x.Type });
+                    table.PrimaryKey("pk_identity_server_api_claims", x => new { x.api_resource_id, x.type });
                     table.ForeignKey(
-                        name: "FK_IdentityServerApiClaims_IdentityServerApiResources_ApiResou~",
-                        column: x => x.ApiResourceId,
+                        name: "fk_api_resource_claim_api_resource_api_resource_id",
+                        column: x => x.api_resource_id,
                         principalTable: "IdentityServerApiResources",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -600,22 +600,22 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerApiScopes",
                 columns: table => new
                 {
-                    ApiResourceId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    DisplayName = table.Column<string>(maxLength: 200, nullable: true),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Required = table.Column<bool>(nullable: false),
-                    Emphasize = table.Column<bool>(nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(nullable: false)
+                    api_resource_id = table.Column<Guid>(nullable: false),
+                    name = table.Column<string>(maxLength: 200, nullable: false),
+                    display_name = table.Column<string>(maxLength: 200, nullable: true),
+                    description = table.Column<string>(maxLength: 1000, nullable: true),
+                    required = table.Column<bool>(nullable: false),
+                    emphasize = table.Column<bool>(nullable: false),
+                    show_in_discovery_document = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerApiScopes", x => new { x.ApiResourceId, x.Name });
+                    table.PrimaryKey("pk_identity_server_api_scopes", x => new { x.api_resource_id, x.name });
                     table.ForeignKey(
-                        name: "FK_IdentityServerApiScopes_IdentityServerApiResources_ApiResou~",
-                        column: x => x.ApiResourceId,
+                        name: "fk_api_scope_api_resource_api_resource_id",
+                        column: x => x.api_resource_id,
                         principalTable: "IdentityServerApiResources",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -623,20 +623,20 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerApiSecrets",
                 columns: table => new
                 {
-                    Type = table.Column<string>(maxLength: 250, nullable: false),
-                    Value = table.Column<string>(maxLength: 4000, nullable: false),
-                    ApiResourceId = table.Column<Guid>(nullable: false),
-                    Description = table.Column<string>(maxLength: 2000, nullable: true),
-                    Expiration = table.Column<DateTime>(nullable: true)
+                    type = table.Column<string>(maxLength: 250, nullable: false),
+                    value = table.Column<string>(maxLength: 4000, nullable: false),
+                    api_resource_id = table.Column<Guid>(nullable: false),
+                    description = table.Column<string>(maxLength: 2000, nullable: true),
+                    expiration = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerApiSecrets", x => new { x.ApiResourceId, x.Type, x.Value });
+                    table.PrimaryKey("pk_identity_server_api_secrets", x => new { x.api_resource_id, x.type, x.value });
                     table.ForeignKey(
-                        name: "FK_IdentityServerApiSecrets_IdentityServerApiResources_ApiReso~",
-                        column: x => x.ApiResourceId,
+                        name: "fk_api_secret_api_resource_api_resource_id",
+                        column: x => x.api_resource_id,
                         principalTable: "IdentityServerApiResources",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -644,18 +644,18 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientClaims",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    Type = table.Column<string>(maxLength: 250, nullable: false),
-                    Value = table.Column<string>(maxLength: 250, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    type = table.Column<string>(maxLength: 250, nullable: false),
+                    value = table.Column<string>(maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientClaims", x => new { x.ClientId, x.Type, x.Value });
+                    table.PrimaryKey("pk_identity_server_client_claims", x => new { x.client_id, x.type, x.value });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientClaims_IdentityServerClients_ClientId",
-                        column: x => x.ClientId,
+                        name: "fk_client_claim_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -663,17 +663,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientCorsOrigins",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    Origin = table.Column<string>(maxLength: 150, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    origin = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientCorsOrigins", x => new { x.ClientId, x.Origin });
+                    table.PrimaryKey("pk_identity_server_client_cors_origins", x => new { x.client_id, x.origin });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientCorsOrigins_IdentityServerClients_Clien~",
-                        column: x => x.ClientId,
+                        name: "fk_client_cors_origin_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -681,17 +681,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientGrantTypes",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    GrantType = table.Column<string>(maxLength: 250, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    grant_type = table.Column<string>(maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientGrantTypes", x => new { x.ClientId, x.GrantType });
+                    table.PrimaryKey("pk_identity_server_client_grant_types", x => new { x.client_id, x.grant_type });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientGrantTypes_IdentityServerClients_Client~",
-                        column: x => x.ClientId,
+                        name: "fk_client_grant_type_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -699,17 +699,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientIdPRestrictions",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    Provider = table.Column<string>(maxLength: 200, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    provider = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientIdPRestrictions", x => new { x.ClientId, x.Provider });
+                    table.PrimaryKey("pk_identity_server_client_id_p_restrictions", x => new { x.client_id, x.provider });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientIdPRestrictions_IdentityServerClients_C~",
-                        column: x => x.ClientId,
+                        name: "fk_client_id_p_restriction_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -717,17 +717,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientPostLogoutRedirectUris",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    PostLogoutRedirectUri = table.Column<string>(maxLength: 2000, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    post_logout_redirect_uri = table.Column<string>(maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientPostLogoutRedirectUris", x => new { x.ClientId, x.PostLogoutRedirectUri });
+                    table.PrimaryKey("pk_identity_server_client_post_logout_redirect_uris", x => new { x.client_id, x.post_logout_redirect_uri });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientPostLogoutRedirectUris_IdentityServerCl~",
-                        column: x => x.ClientId,
+                        name: "fk_client_post_logout_redirect_uri_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -735,18 +735,18 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientProperties",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    Key = table.Column<string>(maxLength: 250, nullable: false),
-                    Value = table.Column<string>(maxLength: 2000, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    key = table.Column<string>(maxLength: 250, nullable: false),
+                    value = table.Column<string>(maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientProperties", x => new { x.ClientId, x.Key });
+                    table.PrimaryKey("pk_identity_server_client_properties", x => new { x.client_id, x.key });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientProperties_IdentityServerClients_Client~",
-                        column: x => x.ClientId,
+                        name: "fk_client_property_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -754,17 +754,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientRedirectUris",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    RedirectUri = table.Column<string>(maxLength: 2000, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    redirect_uri = table.Column<string>(maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientRedirectUris", x => new { x.ClientId, x.RedirectUri });
+                    table.PrimaryKey("pk_identity_server_client_redirect_uris", x => new { x.client_id, x.redirect_uri });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientRedirectUris_IdentityServerClients_Clie~",
-                        column: x => x.ClientId,
+                        name: "fk_client_redirect_uri_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -772,17 +772,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientScopes",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(nullable: false),
-                    Scope = table.Column<string>(maxLength: 200, nullable: false)
+                    client_id = table.Column<Guid>(nullable: false),
+                    scope = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientScopes", x => new { x.ClientId, x.Scope });
+                    table.PrimaryKey("pk_identity_server_client_scopes", x => new { x.client_id, x.scope });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientScopes_IdentityServerClients_ClientId",
-                        column: x => x.ClientId,
+                        name: "fk_client_scope_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -790,20 +790,20 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerClientSecrets",
                 columns: table => new
                 {
-                    Type = table.Column<string>(maxLength: 250, nullable: false),
-                    Value = table.Column<string>(maxLength: 4000, nullable: false),
-                    ClientId = table.Column<Guid>(nullable: false),
-                    Description = table.Column<string>(maxLength: 2000, nullable: true),
-                    Expiration = table.Column<DateTime>(nullable: true)
+                    type = table.Column<string>(maxLength: 250, nullable: false),
+                    value = table.Column<string>(maxLength: 4000, nullable: false),
+                    client_id = table.Column<Guid>(nullable: false),
+                    description = table.Column<string>(maxLength: 2000, nullable: true),
+                    expiration = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerClientSecrets", x => new { x.ClientId, x.Type, x.Value });
+                    table.PrimaryKey("pk_identity_server_client_secrets", x => new { x.client_id, x.type, x.value });
                     table.ForeignKey(
-                        name: "FK_IdentityServerClientSecrets_IdentityServerClients_ClientId",
-                        column: x => x.ClientId,
+                        name: "fk_client_secret_client_client_id",
+                        column: x => x.client_id,
                         principalTable: "IdentityServerClients",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -811,17 +811,17 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerIdentityClaims",
                 columns: table => new
                 {
-                    Type = table.Column<string>(maxLength: 200, nullable: false),
-                    IdentityResourceId = table.Column<Guid>(nullable: false)
+                    type = table.Column<string>(maxLength: 200, nullable: false),
+                    identity_resource_id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerIdentityClaims", x => new { x.IdentityResourceId, x.Type });
+                    table.PrimaryKey("pk_identity_server_identity_claims", x => new { x.identity_resource_id, x.type });
                     table.ForeignKey(
-                        name: "FK_IdentityServerIdentityClaims_IdentityServerIdentityResource~",
-                        column: x => x.IdentityResourceId,
+                        name: "fk_identity_claim_identity_resource_identity_resource_id",
+                        column: x => x.identity_resource_id,
                         principalTable: "IdentityServerIdentityResources",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -829,9 +829,9 @@ namespace CName.PName.SName.Migrations
                 name: "AbpEntityPropertyChanges",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    id = table.Column<Guid>(nullable: false),
                     TenantId = table.Column<Guid>(nullable: true),
-                    EntityChangeId = table.Column<Guid>(nullable: false),
+                    entity_change_id = table.Column<Guid>(nullable: false),
                     NewValue = table.Column<string>(maxLength: 512, nullable: true),
                     OriginalValue = table.Column<string>(maxLength: 512, nullable: true),
                     PropertyName = table.Column<string>(maxLength: 128, nullable: false),
@@ -839,12 +839,12 @@ namespace CName.PName.SName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpEntityPropertyChanges", x => x.Id);
+                    table.PrimaryKey("pk_entity_property_change", x => x.id);
                     table.ForeignKey(
-                        name: "FK_AbpEntityPropertyChanges_AbpEntityChanges_EntityChangeId",
-                        column: x => x.EntityChangeId,
+                        name: "fk_entity_property_change_entity_change_entity_change_id",
+                        column: x => x.entity_change_id,
                         principalTable: "AbpEntityChanges",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -852,167 +852,167 @@ namespace CName.PName.SName.Migrations
                 name: "IdentityServerApiScopeClaims",
                 columns: table => new
                 {
-                    Type = table.Column<string>(maxLength: 200, nullable: false),
-                    ApiResourceId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 200, nullable: false)
+                    type = table.Column<string>(maxLength: 200, nullable: false),
+                    api_resource_id = table.Column<Guid>(nullable: false),
+                    name = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityServerApiScopeClaims", x => new { x.ApiResourceId, x.Name, x.Type });
+                    table.PrimaryKey("pk_identity_server_api_scope_claims", x => new { x.api_resource_id, x.name, x.type });
                     table.ForeignKey(
-                        name: "FK_IdentityServerApiScopeClaims_IdentityServerApiScopes_ApiRes~",
-                        columns: x => new { x.ApiResourceId, x.Name },
+                        name: "fk_api_scope_claim_identity_server_api_scopes_api_scope_api_resou",
+                        columns: x => new { x.api_resource_id, x.name },
                         principalTable: "IdentityServerApiScopes",
-                        principalColumns: new[] { "ApiResourceId", "Name" },
+                        principalColumns: new[] { "api_resource_id", "name" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpAuditLogActions_AuditLogId",
+                name: "ix_audit_log_action_audit_log_id",
                 table: "AbpAuditLogActions",
                 column: "AuditLogId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpAuditLogActions_TenantId_ServiceName_MethodName_Executio~",
+                name: "ix_abp_audit_log_actions_tenant_id_service_name_method_name_executio",
                 table: "AbpAuditLogActions",
                 columns: new[] { "TenantId", "ServiceName", "MethodName", "ExecutionTime" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpAuditLogs_TenantId_ExecutionTime",
+                name: "ix_abp_audit_logs_tenant_id_execution_time",
                 table: "AbpAuditLogs",
-                columns: new[] { "TenantId", "ExecutionTime" });
+                columns: new[] { "TenantId", "execution_time" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpAuditLogs_TenantId_UserId_ExecutionTime",
+                name: "ix_abp_audit_logs_tenant_id_user_id_execution_time",
                 table: "AbpAuditLogs",
-                columns: new[] { "TenantId", "UserId", "ExecutionTime" });
+                columns: new[] { "TenantId", "UserId", "execution_time" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpEntityChanges_AuditLogId",
+                name: "ix_entity_change_audit_log_id",
                 table: "AbpEntityChanges",
                 column: "AuditLogId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpEntityChanges_TenantId_EntityTypeFullName_EntityId",
+                name: "ix_abp_entity_changes_tenant_id_entity_type_full_name_entity_id",
                 table: "AbpEntityChanges",
                 columns: new[] { "TenantId", "EntityTypeFullName", "EntityId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpEntityPropertyChanges_EntityChangeId",
+                name: "ix_entity_property_change_entity_change_id",
                 table: "AbpEntityPropertyChanges",
-                column: "EntityChangeId");
+                column: "entity_change_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpOrganizationUnitRoles_RoleId_OrganizationUnitId",
+                name: "ix_abp_organization_unit_roles_role_id_organization_unit_id",
                 table: "AbpOrganizationUnitRoles",
-                columns: new[] { "RoleId", "OrganizationUnitId" });
+                columns: new[] { "role_id", "organization_unit_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpOrganizationUnits_Code",
+                name: "ix_abp_organization_units_code",
                 table: "AbpOrganizationUnits",
                 column: "Code");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpOrganizationUnits_ParentId",
+                name: "ix_abp_organization_units_parent_id",
                 table: "AbpOrganizationUnits",
-                column: "ParentId");
+                column: "parent_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpPermissionGrants_Name_ProviderName_ProviderKey",
+                name: "ix_abp_permission_grants_name_provider_name_provider_key",
                 table: "AbpPermissionGrants",
-                columns: new[] { "Name", "ProviderName", "ProviderKey" });
+                columns: new[] { "name", "provider_name", "provider_key" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpRoleClaims_RoleId",
+                name: "ix_identity_role_claim_role_id",
                 table: "AbpRoleClaims",
-                column: "RoleId");
+                column: "role_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpRoles_NormalizedName",
+                name: "ix_abp_roles_normalized_name",
                 table: "AbpRoles",
-                column: "NormalizedName");
+                column: "normalized_name");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpSettings_Name_ProviderName_ProviderKey",
+                name: "ix_abp_settings_name_provider_name_provider_key",
                 table: "AbpSettings",
-                columns: new[] { "Name", "ProviderName", "ProviderKey" });
+                columns: new[] { "name", "provider_name", "provider_key" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpTenants_Name",
+                name: "ix_abp_tenants_name",
                 table: "AbpTenants",
-                column: "Name");
+                column: "name");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUserClaims_UserId",
+                name: "ix_identity_user_claim_user_id",
                 table: "AbpUserClaims",
-                column: "UserId");
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUserLogins_LoginProvider_ProviderKey",
+                name: "ix_abp_user_logins_login_provider_provider_key",
                 table: "AbpUserLogins",
-                columns: new[] { "LoginProvider", "ProviderKey" });
+                columns: new[] { "login_provider", "provider_key" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUserOrganizationUnits_UserId_OrganizationUnitId",
+                name: "ix_abp_user_organization_units_user_id_organization_unit_id",
                 table: "AbpUserOrganizationUnits",
-                columns: new[] { "UserId", "OrganizationUnitId" });
+                columns: new[] { "user_id", "organization_unit_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUserRoles_RoleId_UserId",
+                name: "ix_abp_user_roles_role_id_user_id",
                 table: "AbpUserRoles",
-                columns: new[] { "RoleId", "UserId" });
+                columns: new[] { "role_id", "user_id" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUsers_Email",
+                name: "ix_abp_users_email",
                 table: "AbpUsers",
                 column: "Email");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUsers_NormalizedEmail",
+                name: "ix_abp_users_normalized_email",
                 table: "AbpUsers",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUsers_NormalizedUserName",
+                name: "ix_abp_users_normalized_user_name",
                 table: "AbpUsers",
                 column: "NormalizedUserName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpUsers_UserName",
+                name: "ix_abp_users_user_name",
                 table: "AbpUsers",
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityServerClients_ClientId",
+                name: "ix_identity_server_clients_client_id",
                 table: "IdentityServerClients",
-                column: "ClientId");
+                column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityServerDeviceFlowCodes_DeviceCode",
+                name: "ix_identity_server_device_flow_codes_device_code",
                 table: "IdentityServerDeviceFlowCodes",
-                column: "DeviceCode",
+                column: "device_code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityServerDeviceFlowCodes_Expiration",
+                name: "ix_identity_server_device_flow_codes_expiration",
                 table: "IdentityServerDeviceFlowCodes",
-                column: "Expiration");
+                column: "expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityServerDeviceFlowCodes_UserCode",
+                name: "ix_identity_server_device_flow_codes_user_code",
                 table: "IdentityServerDeviceFlowCodes",
-                column: "UserCode",
+                column: "user_code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityServerPersistedGrants_Expiration",
+                name: "ix_identity_server_persisted_grants_expiration",
                 table: "IdentityServerPersistedGrants",
-                column: "Expiration");
+                column: "expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityServerPersistedGrants_SubjectId_ClientId_Type",
+                name: "ix_identity_server_persisted_grants_subject_id_client_id_type",
                 table: "IdentityServerPersistedGrants",
-                columns: new[] { "SubjectId", "ClientId", "Type" });
+                columns: new[] { "subject_id", "client_id", "type" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

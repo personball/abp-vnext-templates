@@ -25,6 +25,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ApplicationName")
@@ -78,6 +79,7 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("ExecutionTime")
+                        .HasColumnName("execution_time")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
@@ -106,6 +108,7 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TenantName")
+                        .HasColumnName("tenant_name")
                         .HasColumnType("text");
 
                     b.Property<string>("Url")
@@ -122,11 +125,14 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_audit_log");
 
-                    b.HasIndex("TenantId", "ExecutionTime");
+                    b.HasIndex("TenantId", "ExecutionTime")
+                        .HasName("ix_abp_audit_logs_tenant_id_execution_time");
 
-                    b.HasIndex("TenantId", "UserId", "ExecutionTime");
+                    b.HasIndex("TenantId", "UserId", "ExecutionTime")
+                        .HasName("ix_abp_audit_logs_tenant_id_user_id_execution_time");
 
                     b.ToTable("AbpAuditLogs");
                 });
@@ -135,6 +141,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AuditLogId")
@@ -172,11 +179,14 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_audit_log_action");
 
-                    b.HasIndex("AuditLogId");
+                    b.HasIndex("AuditLogId")
+                        .HasName("ix_audit_log_action_audit_log_id");
 
-                    b.HasIndex("TenantId", "ServiceName", "MethodName", "ExecutionTime");
+                    b.HasIndex("TenantId", "ServiceName", "MethodName", "ExecutionTime")
+                        .HasName("ix_abp_audit_log_actions_tenant_id_service_name_method_name_executio");
 
                     b.ToTable("AbpAuditLogActions");
                 });
@@ -185,6 +195,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AuditLogId")
@@ -206,6 +217,7 @@ namespace CName.PName.SName.Migrations
                         .HasMaxLength(128);
 
                     b.Property<Guid?>("EntityTenantId")
+                        .HasColumnName("entity_tenant_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("EntityTypeFullName")
@@ -222,11 +234,14 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_entity_change");
 
-                    b.HasIndex("AuditLogId");
+                    b.HasIndex("AuditLogId")
+                        .HasName("ix_entity_change_audit_log_id");
 
-                    b.HasIndex("TenantId", "EntityTypeFullName", "EntityId");
+                    b.HasIndex("TenantId", "EntityTypeFullName", "EntityId")
+                        .HasName("ix_abp_entity_changes_tenant_id_entity_type_full_name_entity_id");
 
                     b.ToTable("AbpEntityChanges");
                 });
@@ -235,9 +250,11 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("EntityChangeId")
+                        .HasColumnName("entity_change_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("NewValue")
@@ -266,9 +283,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_entity_property_change");
 
-                    b.HasIndex("EntityChangeId");
+                    b.HasIndex("EntityChangeId")
+                        .HasName("ix_entity_property_change_entity_change_id");
 
                     b.ToTable("AbpEntityPropertyChanges");
                 });
@@ -277,6 +296,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -286,6 +306,7 @@ namespace CName.PName.SName.Migrations
                         .HasMaxLength(40);
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
@@ -294,28 +315,35 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("text");
 
                     b.Property<bool>("IsStatic")
+                        .HasColumnName("is_static")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("Regex")
+                        .HasColumnName("regex")
                         .HasColumnType("character varying(512)")
                         .HasMaxLength(512);
 
                     b.Property<string>("RegexDescription")
+                        .HasColumnName("regex_description")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
                     b.Property<bool>("Required")
+                        .HasColumnName("required")
                         .HasColumnType("boolean");
 
                     b.Property<int>("ValueType")
+                        .HasColumnName("value_type")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_claim_type");
 
                     b.ToTable("AbpClaimTypes");
                 });
@@ -324,6 +352,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -350,11 +379,13 @@ namespace CName.PName.SName.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
                         .IsRequired()
+                        .HasColumnName("normalized_name")
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
@@ -362,9 +393,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_role");
 
-                    b.HasIndex("NormalizedName");
+                    b.HasIndex("NormalizedName")
+                        .HasName("ix_abp_roles_normalized_name");
 
                     b.ToTable("AbpRoles");
                 });
@@ -372,27 +405,33 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityRoleClaim", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
+                        .HasColumnName("claim_type")
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("ClaimValue")
+                        .HasColumnName("claim_value")
                         .HasColumnType("character varying(1024)")
                         .HasMaxLength(1024);
 
                     b.Property<Guid>("RoleId")
+                        .HasColumnName("role_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_role_claim");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .HasName("ix_identity_role_claim_role_id");
 
                     b.ToTable("AbpRoleClaims");
                 });
@@ -401,6 +440,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<int>("AccessFailedCount")
@@ -468,6 +508,7 @@ namespace CName.PName.SName.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnName("lockout_end")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
@@ -530,15 +571,20 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_user");
 
-                    b.HasIndex("Email");
+                    b.HasIndex("Email")
+                        .HasName("ix_abp_users_email");
 
-                    b.HasIndex("NormalizedEmail");
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("ix_abp_users_normalized_email");
 
-                    b.HasIndex("NormalizedUserName");
+                    b.HasIndex("NormalizedUserName")
+                        .HasName("ix_abp_users_normalized_user_name");
 
-                    b.HasIndex("UserName");
+                    b.HasIndex("UserName")
+                        .HasName("ix_abp_users_user_name");
 
                     b.ToTable("AbpUsers");
                 });
@@ -546,14 +592,17 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserClaim", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
+                        .HasColumnName("claim_type")
                         .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("ClaimValue")
+                        .HasColumnName("claim_value")
                         .HasColumnType("character varying(1024)")
                         .HasMaxLength(1024);
 
@@ -562,11 +611,14 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
+                        .HasColumnName("user_id")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_user_claim");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasName("ix_identity_user_claim_user_id");
 
                     b.ToTable("AbpUserClaims");
                 });
@@ -574,18 +626,22 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserLogin", b =>
                 {
                     b.Property<Guid>("UserId")
+                        .HasColumnName("user_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
+                        .HasColumnName("login_provider")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("ProviderDisplayName")
+                        .HasColumnName("provider_display_name")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
                         .IsRequired()
+                        .HasColumnName("provider_key")
                         .HasColumnType("character varying(196)")
                         .HasMaxLength(196);
 
@@ -593,9 +649,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("UserId", "LoginProvider");
+                    b.HasKey("UserId", "LoginProvider")
+                        .HasName("pk_abp_user_logins");
 
-                    b.HasIndex("LoginProvider", "ProviderKey");
+                    b.HasIndex("LoginProvider", "ProviderKey")
+                        .HasName("ix_abp_user_logins_login_provider_provider_key");
 
                     b.ToTable("AbpUserLogins");
                 });
@@ -603,9 +661,11 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserOrganizationUnit", b =>
                 {
                     b.Property<Guid>("OrganizationUnitId")
+                        .HasColumnName("organization_unit_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
+                        .HasColumnName("user_id")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
@@ -620,9 +680,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("OrganizationUnitId", "UserId");
+                    b.HasKey("OrganizationUnitId", "UserId")
+                        .HasName("pk_abp_user_organization_units");
 
-                    b.HasIndex("UserId", "OrganizationUnitId");
+                    b.HasIndex("UserId", "OrganizationUnitId")
+                        .HasName("ix_abp_user_organization_units_user_id_organization_unit_id");
 
                     b.ToTable("AbpUserOrganizationUnits");
                 });
@@ -630,18 +692,22 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
+                        .HasColumnName("user_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("RoleId")
+                        .HasColumnName("role_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.HasKey("UserId", "RoleId")
+                        .HasName("pk_abp_user_roles");
 
-                    b.HasIndex("RoleId", "UserId");
+                    b.HasIndex("RoleId", "UserId")
+                        .HasName("ix_abp_user_roles_role_id_user_id");
 
                     b.ToTable("AbpUserRoles");
                 });
@@ -649,13 +715,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserToken", b =>
                 {
                     b.Property<Guid>("UserId")
+                        .HasColumnName("user_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
+                        .HasColumnName("login_provider")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("Name")
+                        .HasColumnName("name")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
@@ -664,9 +733,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Value")
+                        .HasColumnName("value")
                         .HasColumnType("text");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.HasKey("UserId", "LoginProvider", "Name")
+                        .HasName("pk_abp_user_tokens");
 
                     b.ToTable("AbpUserTokens");
                 });
@@ -675,6 +746,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Code")
@@ -730,17 +802,21 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("ParentId")
+                        .HasColumnName("parent_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_organization_unit");
 
-                    b.HasIndex("Code");
+                    b.HasIndex("Code")
+                        .HasName("ix_abp_organization_units_code");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParentId")
+                        .HasName("ix_abp_organization_units_parent_id");
 
                     b.ToTable("AbpOrganizationUnits");
                 });
@@ -748,9 +824,11 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnitRole", b =>
                 {
                     b.Property<Guid>("OrganizationUnitId")
+                        .HasColumnName("organization_unit_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("RoleId")
+                        .HasColumnName("role_id")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
@@ -765,9 +843,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("OrganizationUnitId", "RoleId");
+                    b.HasKey("OrganizationUnitId", "RoleId")
+                        .HasName("pk_abp_organization_unit_roles");
 
-                    b.HasIndex("RoleId", "OrganizationUnitId");
+                    b.HasIndex("RoleId", "OrganizationUnitId")
+                        .HasName("ix_abp_organization_unit_roles_role_id_organization_unit_id");
 
                     b.ToTable("AbpOrganizationUnitRoles");
                 });
@@ -776,6 +856,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -801,14 +882,17 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(1000)")
                         .HasMaxLength(1000);
 
                     b.Property<string>("DisplayName")
+                        .HasColumnName("display_name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<bool>("Enabled")
+                        .HasColumnName("enabled")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ExtraProperties")
@@ -831,13 +915,16 @@ namespace CName.PName.SName.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Properties")
+                        .HasColumnName("properties")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_api_resource");
 
                     b.ToTable("IdentityServerApiResources");
                 });
@@ -845,13 +932,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceClaim", b =>
                 {
                     b.Property<Guid>("ApiResourceId")
+                        .HasColumnName("api_resource_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
+                        .HasColumnName("type")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
-                    b.HasKey("ApiResourceId", "Type");
+                    b.HasKey("ApiResourceId", "Type")
+                        .HasName("pk_identity_server_api_claims");
 
                     b.ToTable("IdentityServerApiClaims");
                 });
@@ -859,30 +949,38 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiScope", b =>
                 {
                     b.Property<Guid>("ApiResourceId")
+                        .HasColumnName("api_resource_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .HasColumnName("name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(1000)")
                         .HasMaxLength(1000);
 
                     b.Property<string>("DisplayName")
+                        .HasColumnName("display_name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<bool>("Emphasize")
+                        .HasColumnName("emphasize")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("Required")
+                        .HasColumnName("required")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("ShowInDiscoveryDocument")
+                        .HasColumnName("show_in_discovery_document")
                         .HasColumnType("boolean");
 
-                    b.HasKey("ApiResourceId", "Name");
+                    b.HasKey("ApiResourceId", "Name")
+                        .HasName("pk_identity_server_api_scopes");
 
                     b.ToTable("IdentityServerApiScopes");
                 });
@@ -890,17 +988,21 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiScopeClaim", b =>
                 {
                     b.Property<Guid>("ApiResourceId")
+                        .HasColumnName("api_resource_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .HasColumnName("name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Type")
+                        .HasColumnName("type")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
-                    b.HasKey("ApiResourceId", "Name", "Type");
+                    b.HasKey("ApiResourceId", "Name", "Type")
+                        .HasName("pk_identity_server_api_scope_claims");
 
                     b.ToTable("IdentityServerApiScopeClaims");
                 });
@@ -908,24 +1010,30 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiSecret", b =>
                 {
                     b.Property<Guid>("ApiResourceId")
+                        .HasColumnName("api_resource_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
+                        .HasColumnName("type")
                         .HasColumnType("character varying(250)")
                         .HasMaxLength(250);
 
                     b.Property<string>("Value")
+                        .HasColumnName("value")
                         .HasColumnType("character varying(4000)")
                         .HasMaxLength(4000);
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
                     b.Property<DateTime?>("Expiration")
+                        .HasColumnName("expiration")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("ApiResourceId", "Type", "Value");
+                    b.HasKey("ApiResourceId", "Type", "Value")
+                        .HasName("pk_identity_server_api_secrets");
 
                     b.ToTable("IdentityServerApiSecrets");
                 });
@@ -934,59 +1042,76 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<int>("AbsoluteRefreshTokenLifetime")
+                        .HasColumnName("absolute_refresh_token_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<int>("AccessTokenLifetime")
+                        .HasColumnName("access_token_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<int>("AccessTokenType")
+                        .HasColumnName("access_token_type")
                         .HasColumnType("integer");
 
                     b.Property<bool>("AllowAccessTokensViaBrowser")
+                        .HasColumnName("allow_access_tokens_via_browser")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("AllowOfflineAccess")
+                        .HasColumnName("allow_offline_access")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("AllowPlainTextPkce")
+                        .HasColumnName("allow_plain_text_pkce")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("AllowRememberConsent")
+                        .HasColumnName("allow_remember_consent")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("AlwaysIncludeUserClaimsInIdToken")
+                        .HasColumnName("always_include_user_claims_in_id_token")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("AlwaysSendClientClaims")
+                        .HasColumnName("always_send_client_claims")
                         .HasColumnType("boolean");
 
                     b.Property<int>("AuthorizationCodeLifetime")
+                        .HasColumnName("authorization_code_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<bool>("BackChannelLogoutSessionRequired")
+                        .HasColumnName("back_channel_logout_session_required")
                         .HasColumnType("boolean");
 
                     b.Property<string>("BackChannelLogoutUri")
+                        .HasColumnName("back_channel_logout_uri")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
                     b.Property<string>("ClientClaimsPrefix")
+                        .HasColumnName("client_claims_prefix")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientId")
                         .IsRequired()
+                        .HasColumnName("client_id")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientName")
+                        .HasColumnName("client_name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientUri")
+                        .HasColumnName("client_uri")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
@@ -997,6 +1122,7 @@ namespace CName.PName.SName.Migrations
                         .HasMaxLength(40);
 
                     b.Property<int?>("ConsentLifetime")
+                        .HasColumnName("consent_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("CreationTime")
@@ -1016,16 +1142,20 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(1000)")
                         .HasMaxLength(1000);
 
                     b.Property<int>("DeviceCodeLifetime")
+                        .HasColumnName("device_code_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<bool>("EnableLocalLogin")
+                        .HasColumnName("enable_local_login")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("Enabled")
+                        .HasColumnName("enabled")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ExtraProperties")
@@ -1033,16 +1163,20 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("text");
 
                     b.Property<bool>("FrontChannelLogoutSessionRequired")
+                        .HasColumnName("front_channel_logout_session_required")
                         .HasColumnType("boolean");
 
                     b.Property<string>("FrontChannelLogoutUri")
+                        .HasColumnName("front_channel_logout_uri")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
                     b.Property<int>("IdentityTokenLifetime")
+                        .HasColumnName("identity_token_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<bool>("IncludeJwtId")
+                        .HasColumnName("include_jwt_id")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsDeleted")
@@ -1060,49 +1194,63 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("LogoUri")
+                        .HasColumnName("logo_uri")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
                     b.Property<string>("PairWiseSubjectSalt")
+                        .HasColumnName("pair_wise_subject_salt")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ProtocolType")
                         .IsRequired()
+                        .HasColumnName("protocol_type")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<int>("RefreshTokenExpiration")
+                        .HasColumnName("refresh_token_expiration")
                         .HasColumnType("integer");
 
                     b.Property<int>("RefreshTokenUsage")
+                        .HasColumnName("refresh_token_usage")
                         .HasColumnType("integer");
 
                     b.Property<bool>("RequireClientSecret")
+                        .HasColumnName("require_client_secret")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("RequireConsent")
+                        .HasColumnName("require_consent")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("RequirePkce")
+                        .HasColumnName("require_pkce")
                         .HasColumnType("boolean");
 
                     b.Property<int>("SlidingRefreshTokenLifetime")
+                        .HasColumnName("sliding_refresh_token_lifetime")
                         .HasColumnType("integer");
 
                     b.Property<bool>("UpdateAccessTokenClaimsOnRefresh")
+                        .HasColumnName("update_access_token_claims_on_refresh")
                         .HasColumnType("boolean");
 
                     b.Property<string>("UserCodeType")
+                        .HasColumnName("user_code_type")
                         .HasColumnType("character varying(100)")
                         .HasMaxLength(100);
 
                     b.Property<int?>("UserSsoLifetime")
+                        .HasColumnName("user_sso_lifetime")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_client");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientId")
+                        .HasName("ix_identity_server_clients_client_id");
 
                     b.ToTable("IdentityServerClients");
                 });
@@ -1110,17 +1258,21 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientClaim", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
+                        .HasColumnName("type")
                         .HasColumnType("character varying(250)")
                         .HasMaxLength(250);
 
                     b.Property<string>("Value")
+                        .HasColumnName("value")
                         .HasColumnType("character varying(250)")
                         .HasMaxLength(250);
 
-                    b.HasKey("ClientId", "Type", "Value");
+                    b.HasKey("ClientId", "Type", "Value")
+                        .HasName("pk_identity_server_client_claims");
 
                     b.ToTable("IdentityServerClientClaims");
                 });
@@ -1128,13 +1280,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientCorsOrigin", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Origin")
+                        .HasColumnName("origin")
                         .HasColumnType("character varying(150)")
                         .HasMaxLength(150);
 
-                    b.HasKey("ClientId", "Origin");
+                    b.HasKey("ClientId", "Origin")
+                        .HasName("pk_identity_server_client_cors_origins");
 
                     b.ToTable("IdentityServerClientCorsOrigins");
                 });
@@ -1142,13 +1297,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientGrantType", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("GrantType")
+                        .HasColumnName("grant_type")
                         .HasColumnType("character varying(250)")
                         .HasMaxLength(250);
 
-                    b.HasKey("ClientId", "GrantType");
+                    b.HasKey("ClientId", "GrantType")
+                        .HasName("pk_identity_server_client_grant_types");
 
                     b.ToTable("IdentityServerClientGrantTypes");
                 });
@@ -1156,13 +1314,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientIdPRestriction", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Provider")
+                        .HasColumnName("provider")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
-                    b.HasKey("ClientId", "Provider");
+                    b.HasKey("ClientId", "Provider")
+                        .HasName("pk_identity_server_client_id_p_restrictions");
 
                     b.ToTable("IdentityServerClientIdPRestrictions");
                 });
@@ -1170,13 +1331,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientPostLogoutRedirectUri", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("PostLogoutRedirectUri")
+                        .HasColumnName("post_logout_redirect_uri")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
-                    b.HasKey("ClientId", "PostLogoutRedirectUri");
+                    b.HasKey("ClientId", "PostLogoutRedirectUri")
+                        .HasName("pk_identity_server_client_post_logout_redirect_uris");
 
                     b.ToTable("IdentityServerClientPostLogoutRedirectUris");
                 });
@@ -1184,18 +1348,22 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientProperty", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Key")
+                        .HasColumnName("key")
                         .HasColumnType("character varying(250)")
                         .HasMaxLength(250);
 
                     b.Property<string>("Value")
                         .IsRequired()
+                        .HasColumnName("value")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
-                    b.HasKey("ClientId", "Key");
+                    b.HasKey("ClientId", "Key")
+                        .HasName("pk_identity_server_client_properties");
 
                     b.ToTable("IdentityServerClientProperties");
                 });
@@ -1203,13 +1371,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientRedirectUri", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("RedirectUri")
+                        .HasColumnName("redirect_uri")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
-                    b.HasKey("ClientId", "RedirectUri");
+                    b.HasKey("ClientId", "RedirectUri")
+                        .HasName("pk_identity_server_client_redirect_uris");
 
                     b.ToTable("IdentityServerClientRedirectUris");
                 });
@@ -1217,13 +1388,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientScope", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Scope")
+                        .HasColumnName("scope")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
-                    b.HasKey("ClientId", "Scope");
+                    b.HasKey("ClientId", "Scope")
+                        .HasName("pk_identity_server_client_scopes");
 
                     b.ToTable("IdentityServerClientScopes");
                 });
@@ -1231,24 +1405,30 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.ClientSecret", b =>
                 {
                     b.Property<Guid>("ClientId")
+                        .HasColumnName("client_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
+                        .HasColumnName("type")
                         .HasColumnType("character varying(250)")
                         .HasMaxLength(250);
 
                     b.Property<string>("Value")
+                        .HasColumnName("value")
                         .HasColumnType("character varying(4000)")
                         .HasMaxLength(4000);
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(2000)")
                         .HasMaxLength(2000);
 
                     b.Property<DateTime?>("Expiration")
+                        .HasColumnName("expiration")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("ClientId", "Type", "Value");
+                    b.HasKey("ClientId", "Type", "Value")
+                        .HasName("pk_identity_server_client_secrets");
 
                     b.ToTable("IdentityServerClientSecrets");
                 });
@@ -1257,10 +1437,12 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
+                        .HasColumnName("client_id")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
@@ -1280,16 +1462,19 @@ namespace CName.PName.SName.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
+                        .HasColumnName("data")
                         .HasColumnType("character varying(50000)")
                         .HasMaxLength(50000);
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
+                        .HasColumnName("device_code")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("Expiration")
                         .IsRequired()
+                        .HasColumnName("expiration")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
@@ -1297,23 +1482,29 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("SubjectId")
+                        .HasColumnName("subject_id")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("UserCode")
                         .IsRequired()
+                        .HasColumnName("user_code")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_device_flow_codes");
 
                     b.HasIndex("DeviceCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasName("ix_identity_server_device_flow_codes_device_code");
 
-                    b.HasIndex("Expiration");
+                    b.HasIndex("Expiration")
+                        .HasName("ix_identity_server_device_flow_codes_expiration");
 
                     b.HasIndex("UserCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasName("ix_identity_server_device_flow_codes_user_code");
 
                     b.ToTable("IdentityServerDeviceFlowCodes");
                 });
@@ -1321,11 +1512,13 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Grants.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
+                        .HasColumnName("key")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientId")
                         .IsRequired()
+                        .HasColumnName("client_id")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
@@ -1336,14 +1529,17 @@ namespace CName.PName.SName.Migrations
                         .HasMaxLength(40);
 
                     b.Property<DateTime>("CreationTime")
+                        .HasColumnName("creation_time")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Data")
                         .IsRequired()
+                        .HasColumnName("data")
                         .HasColumnType("character varying(50000)")
                         .HasMaxLength(50000);
 
                     b.Property<DateTime?>("Expiration")
+                        .HasColumnName("expiration")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
@@ -1351,22 +1547,28 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("Id")
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("SubjectId")
+                        .HasColumnName("subject_id")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Type")
                         .IsRequired()
+                        .HasColumnName("type")
                         .HasColumnType("character varying(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("Key");
+                    b.HasKey("Key")
+                        .HasName("pk_identity_server_persisted_grants");
 
-                    b.HasIndex("Expiration");
+                    b.HasIndex("Expiration")
+                        .HasName("ix_identity_server_persisted_grants_expiration");
 
-                    b.HasIndex("SubjectId", "ClientId", "Type");
+                    b.HasIndex("SubjectId", "ClientId", "Type")
+                        .HasName("ix_identity_server_persisted_grants_subject_id_client_id_type");
 
                     b.ToTable("IdentityServerPersistedGrants");
                 });
@@ -1374,13 +1576,16 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityClaim", b =>
                 {
                     b.Property<Guid>("IdentityResourceId")
+                        .HasColumnName("identity_resource_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
+                        .HasColumnName("type")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
-                    b.HasKey("IdentityResourceId", "Type");
+                    b.HasKey("IdentityResourceId", "Type")
+                        .HasName("pk_identity_server_identity_claims");
 
                     b.ToTable("IdentityServerIdentityClaims");
                 });
@@ -1389,6 +1594,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -1414,17 +1620,21 @@ namespace CName.PName.SName.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
+                        .HasColumnName("description")
                         .HasColumnType("character varying(1000)")
                         .HasMaxLength(1000);
 
                     b.Property<string>("DisplayName")
+                        .HasColumnName("display_name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<bool>("Emphasize")
+                        .HasColumnName("emphasize")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("Enabled")
+                        .HasColumnName("enabled")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ExtraProperties")
@@ -1447,19 +1657,24 @@ namespace CName.PName.SName.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Properties")
+                        .HasColumnName("properties")
                         .HasColumnType("text");
 
                     b.Property<bool>("Required")
+                        .HasColumnName("required")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("ShowInDiscoveryDocument")
+                        .HasColumnName("show_in_discovery_document")
                         .HasColumnType("boolean");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_resource");
 
                     b.ToTable("IdentityServerIdentityResources");
                 });
@@ -1468,20 +1683,24 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
                         .IsRequired()
+                        .HasColumnName("provider_key")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("ProviderName")
                         .IsRequired()
+                        .HasColumnName("provider_name")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
@@ -1489,9 +1708,11 @@ namespace CName.PName.SName.Migrations
                         .HasColumnName("TenantId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_permission_grant");
 
-                    b.HasIndex("Name", "ProviderName", "ProviderKey");
+                    b.HasIndex("Name", "ProviderName", "ProviderKey")
+                        .HasName("ix_abp_permission_grants_name_provider_name_provider_key");
 
                     b.ToTable("AbpPermissionGrants");
                 });
@@ -1500,29 +1721,36 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
+                        .HasColumnName("provider_key")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("ProviderName")
+                        .HasColumnName("provider_name")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("Value")
                         .IsRequired()
+                        .HasColumnName("value")
                         .HasColumnType("character varying(2048)")
                         .HasMaxLength(2048);
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_setting");
 
-                    b.HasIndex("Name", "ProviderName", "ProviderKey");
+                    b.HasIndex("Name", "ProviderName", "ProviderKey")
+                        .HasName("ix_abp_settings_name_provider_name_provider_key");
 
                     b.ToTable("AbpSettings");
                 });
@@ -1531,6 +1759,7 @@ namespace CName.PName.SName.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -1575,12 +1804,15 @@ namespace CName.PName.SName.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_tenant");
 
-                    b.HasIndex("Name");
+                    b.HasIndex("Name")
+                        .HasName("ix_abp_tenants_name");
 
                     b.ToTable("AbpTenants");
                 });
@@ -1588,18 +1820,22 @@ namespace CName.PName.SName.Migrations
             modelBuilder.Entity("Volo.Abp.TenantManagement.TenantConnectionString", b =>
                 {
                     b.Property<Guid>("TenantId")
+                        .HasColumnName("tenant_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .HasColumnName("name")
                         .HasColumnType("character varying(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("Value")
                         .IsRequired()
+                        .HasColumnName("value")
                         .HasColumnType("character varying(1024)")
                         .HasMaxLength(1024);
 
-                    b.HasKey("TenantId", "Name");
+                    b.HasKey("TenantId", "Name")
+                        .HasName("pk_abp_tenant_connection_strings");
 
                     b.ToTable("AbpTenantConnectionStrings");
                 });
@@ -1609,6 +1845,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.AuditLogging.AuditLog", null)
                         .WithMany("Actions")
                         .HasForeignKey("AuditLogId")
+                        .HasConstraintName("fk_audit_log_action_audit_log_audit_log_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1618,6 +1855,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.AuditLogging.AuditLog", null)
                         .WithMany("EntityChanges")
                         .HasForeignKey("AuditLogId")
+                        .HasConstraintName("fk_entity_change_audit_log_audit_log_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1627,6 +1865,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.AuditLogging.EntityChange", null)
                         .WithMany("PropertyChanges")
                         .HasForeignKey("EntityChangeId")
+                        .HasConstraintName("fk_entity_property_change_entity_change_entity_change_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1636,6 +1875,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.IdentityRole", null)
                         .WithMany("Claims")
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_identity_role_claim_identity_role_identity_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1645,6 +1885,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_identity_user_claim_identity_user_identity_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1654,6 +1895,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_identity_user_login_identity_user_identity_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1663,12 +1905,14 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.OrganizationUnit", null)
                         .WithMany()
                         .HasForeignKey("OrganizationUnitId")
+                        .HasConstraintName("fk_abp_user_organization_units_abp_organization_units_organization_")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany("OrganizationUnits")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_identity_user_organization_unit_identity_user_identity_user")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1678,12 +1922,14 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_abp_user_roles_identity_role_identity_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_identity_user_role_identity_user_identity_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1693,6 +1939,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany("Tokens")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_identity_user_token_identity_user_identity_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1701,7 +1948,8 @@ namespace CName.PName.SName.Migrations
                 {
                     b.HasOne("Volo.Abp.Identity.OrganizationUnit", null)
                         .WithMany()
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_abp_organization_units_abp_organization_units_organization_unit");
                 });
 
             modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnitRole", b =>
@@ -1709,12 +1957,14 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.Identity.OrganizationUnit", null)
                         .WithMany("Roles")
                         .HasForeignKey("OrganizationUnitId")
+                        .HasConstraintName("fk_organization_unit_role_organization_unit_organization_unit_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Volo.Abp.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_abp_organization_unit_roles_abp_roles_identity_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1724,6 +1974,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiResource", null)
                         .WithMany("UserClaims")
                         .HasForeignKey("ApiResourceId")
+                        .HasConstraintName("fk_api_resource_claim_api_resource_api_resource_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1733,6 +1984,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiResource", null)
                         .WithMany("Scopes")
                         .HasForeignKey("ApiResourceId")
+                        .HasConstraintName("fk_api_scope_api_resource_api_resource_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1742,6 +1994,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiScope", null)
                         .WithMany("UserClaims")
                         .HasForeignKey("ApiResourceId", "Name")
+                        .HasConstraintName("fk_api_scope_claim_identity_server_api_scopes_api_scope_api_resou")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1751,6 +2004,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiResource", null)
                         .WithMany("Secrets")
                         .HasForeignKey("ApiResourceId")
+                        .HasConstraintName("fk_api_secret_api_resource_api_resource_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1760,6 +2014,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("Claims")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_claim_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1769,6 +2024,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("AllowedCorsOrigins")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_cors_origin_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1778,6 +2034,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("AllowedGrantTypes")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_grant_type_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1787,6 +2044,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("IdentityProviderRestrictions")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_id_p_restriction_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1796,6 +2054,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("PostLogoutRedirectUris")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_post_logout_redirect_uri_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1805,6 +2064,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("Properties")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_property_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1814,6 +2074,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("RedirectUris")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_redirect_uri_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1823,6 +2084,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("AllowedScopes")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_scope_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1832,6 +2094,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.Clients.Client", null)
                         .WithMany("ClientSecrets")
                         .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_client_secret_client_client_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1841,6 +2104,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.IdentityServer.IdentityResources.IdentityResource", null)
                         .WithMany("UserClaims")
                         .HasForeignKey("IdentityResourceId")
+                        .HasConstraintName("fk_identity_claim_identity_resource_identity_resource_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1850,6 +2114,7 @@ namespace CName.PName.SName.Migrations
                     b.HasOne("Volo.Abp.TenantManagement.Tenant", null)
                         .WithMany("ConnectionStrings")
                         .HasForeignKey("TenantId")
+                        .HasConstraintName("fk_tenant_connection_string_tenant_tenant_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
