@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
@@ -55,6 +56,13 @@ namespace CName.PName.SName
             Configure<AbpDbContextOptions>(options =>
             {
                 options.UseNpgsql();
+            });
+
+            Configure<AbpAspNetCoreMvcOptions>(options =>
+            {
+                options
+                    .ConventionalControllers
+                    .Create(typeof(SNameApplicationModule).Assembly);
             });
 
             Configure<AbpMultiTenancyOptions>(options =>
