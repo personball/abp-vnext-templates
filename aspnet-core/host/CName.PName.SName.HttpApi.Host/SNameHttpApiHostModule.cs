@@ -92,6 +92,7 @@ namespace CName.PName.SName
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameApplicationModule).Assembly.GetName().Name + ".xml"));
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameDomainSharedModule).Assembly.GetName().Name + ".xml"));
                 });
+            context.Services.AddSwaggerGenNewtonsoftSupport();
 
             Configure<AbpLocalizationOptions>(options =>
             {
