@@ -12,9 +12,8 @@ namespace CName.PName.SName.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<SNameHttpApiHostMigrationsDbContext>()
-                .UseNpgsql(configuration.GetConnectionString("SName"))
-                .UseSnakeCaseNamingConvention();
-
+                .UseNpgsql(configuration.GetConnectionString("SName"));
+                // .UseSnakeCaseNamingConvention(); // didnt solve Property from base type or interface.
             return new SNameHttpApiHostMigrationsDbContext(builder.Options);
         }
 

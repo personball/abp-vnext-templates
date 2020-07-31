@@ -31,7 +31,8 @@ namespace CName.PName.SName.EntityFrameworkCore
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSnakeCaseNamingConvention();
+
+            // optionsBuilder.UseSnakeCaseNamingConvention();// didnt solve Property from base type or interface.
         }
     }
 }

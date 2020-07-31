@@ -12,6 +12,7 @@ namespace CName.PName.SName.EntityFrameworkCore
 
         }
 
+        // https://stackoverflow.com/questions/37493095/entity-framework-core-rc2-table-name-pluralization DbSet PropertyName decide table name as default, without dbset use class name.
         public DbSet<Demo> Demos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

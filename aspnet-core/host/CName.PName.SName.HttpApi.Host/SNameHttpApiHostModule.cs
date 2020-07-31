@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CName.PName.SName.EntityFrameworkCore;
 using CName.PName.SName.MultiTenancy;
 using IdentityModel;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
@@ -42,11 +44,14 @@ namespace CName.PName.SName
         typeof(AbpEntityFrameworkCorePostgreSqlModule),
         typeof(AbpAuditLoggingEntityFrameworkCoreModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-        typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule))]
+
+    // typeof(AbpSettingManagementEntityFrameworkCoreModule), // micro service should not use settings in main db
     public class SNameHttpApiHostModule : AbpModule
     {
         private const string DefaultCorsPolicyName = "Default";
+
+        private const string PathBase = "SName";
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
@@ -91,18 +96,52 @@ namespace CName.PName.SName
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameApplicationContractsModule).Assembly.GetName().Name + ".xml"));
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameApplicationModule).Assembly.GetName().Name + ".xml"));
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameDomainSharedModule).Assembly.GetName().Name + ".xml"));
+
+                    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.OAuth2,
+                        Flows = new OpenApiOAuthFlows
+                        {
+                            ClientCredentials = new OpenApiOAuthFlow
+                            {
+                                AuthorizationUrl = new Uri(configuration["AuthServer:Authority"]),
+                                Scopes = new Dictionary<string, string>
+                                {
+                                    { "SName.all", "SName" } // scopes
+                                },
+                                TokenUrl = new Uri($"{configuration["AuthServer:Authority"]}/connect/token")
+                            }
+                        },
+                        Scheme = JwtBearerDefaults.AuthenticationScheme,
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        OpenIdConnectUrl = new Uri($"{configuration["AuthServer:Authority"]}/.well-known/openid-configuration")
+                    });
+
+                    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                            },
+                            new[] { "SName.all" } // scopes
+                        }
+                    });
                 });
             context.Services.AddSwaggerGenNewtonsoftSupport();
 
             Configure<AbpLocalizationOptions>(options =>
             {
-                options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
+                // options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
                 options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
+
+                // options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
+                // options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
+                // options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
+
+                // options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
             });
 
             // Updates AbpClaimTypes to be compatible with identity server claims.
@@ -111,13 +150,14 @@ namespace CName.PName.SName
             AbpClaimTypes.Role = JwtClaimTypes.Role;
             AbpClaimTypes.Email = JwtClaimTypes.Email;
 
-            context.Services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = configuration["AuthServer:Authority"];
-                    options.RequireHttpsMetadata = false;
-                    options.ApiName = "SName";
-                });
+            context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.Authority = configuration["AuthServer:Authority"];
+                   options.Audience = configuration["AuthServer:Audience"];
+                   options.RequireHttpsMetadata = false;
+                   options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(1);
+               });
 
             Configure<AbpDistributedCacheOptions>(options =>
             {
@@ -166,6 +206,7 @@ namespace CName.PName.SName
                 app.UseHsts();
             }
 
+            app.UsePathBase($"/{PathBase}");
             app.UseHttpsRedirection();
             app.UseCorrelationId();
             app.UseVirtualFiles();
@@ -185,7 +226,7 @@ namespace CName.PName.SName
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
+                options.SwaggerEndpoint($"{PathBase}/swagger/v1/swagger.json", "Support APP API");
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
