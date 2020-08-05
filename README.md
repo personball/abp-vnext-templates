@@ -13,6 +13,8 @@ project templates for abp vnext
 1. Use `SnakeCaseNamingConvention` for postgreSql table names and column names.
 1. config swagger doc IncludeXmlComments to load comment xmls (SNameApplicationContractsModule,SNameApplicationModule,SNameDomainSharedModule)
 1. config `AddSwaggerGenNewtonsoftSupport` to make SwaggerDoc enable `StringEnumConverter`
+1. disable SnakeCaseNamingConvention as it didnt deal with PropertyName from base types or interfaces.
+1. remove docker compose ymls, and update Dockerfile for projects in /host, adapt to k8s.
 
 # how
 
