@@ -1,11 +1,13 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+# docker build this file in project root folder (../../) 
+# with command `docker build . -f .\host\CName.PName.SName.IdentityServer\Dockerfile -t SName:<UrTAG> `
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY . .
-WORKDIR /src/templates/service/host/CName.PName.SName.IdentityServer
+WORKDIR /src/host/CName.PName.SName.IdentityServer
 RUN dotnet restore -nowarn:msb3202,nu1503
 RUN dotnet build --no-restore -c Release -o /app
 
