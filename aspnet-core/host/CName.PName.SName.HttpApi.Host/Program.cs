@@ -19,6 +19,7 @@ namespace CName.PName.SName
 #endif
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
+                .WriteTo.Console()
                 .WriteTo.File("Logs/logs.txt")
                 .CreateLogger();
 
