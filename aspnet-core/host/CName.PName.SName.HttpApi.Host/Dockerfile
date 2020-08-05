@@ -1,5 +1,5 @@
 # docker build this file in project root folder (../../) 
-# with command `docker build . -f .\host\CName.PName.SName.HttpApi.Host\Dockerfile -t SName:<UrTAG> `
+# with command `docker build -f .\host\CName.PName.SName.HttpApi.Host\Dockerfile -t SName:<UrTAG> .`
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
