@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DangQu.PT.Platform.Domain.Shared</name>
+    </assembly>
+    <members>
+        <member name="P:DangQu.PT.Platform.Organization.Dto.TenantInputDto.Name">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Organization.Dto.TenantInputDto.EnterpriseCore">
+            <summary>
+            企业宗旨
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Organization.Dto.TenantInputDto.Logo">
+            <summary>
+            企业LOGO
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Organization.Dto.TenantInputDto.Industry">
+            <summary>
+            所属行业
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.Platform.Identity.IdentityUserConsts.MaxLoginTryNum">
+            <summary>
+            最大尝试登录次数
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.Platform.Identity.IdentityUserConsts.LimitLoginTime">
+            <summary>
+            登录次数用完之后 限制登录时间间隔 3 小时
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.IdentityUserConsts.MaxPasswordLength">
+            <summary>
+            Default value: 128
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.IdentityUserConsts.MaxPasswordHashLength">
+            <summary>
+            Default value: 256
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.IdentityUserConsts.MaxSecurityStampLength">
+            <summary>
+            Default value: 256
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.UserConsts.MaxUserNameLength">
+            <summary>
+            Default value: 256
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.UserConsts.MaxNameLength">
+            <summary>
+            Default value: 64
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.UserConsts.MaxSurnameLength">
+            <summary>
+            Default value: 64
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.UserConsts.MaxEmailLength">
+            <summary>
+            Default value: 256
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Platform.Identity.UserConsts.MaxPhoneNumberLength">
+            <summary>
+            Default value: 16
+            </summary>
+        </member>
+    </members>
+</doc>

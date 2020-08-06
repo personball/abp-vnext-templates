@@ -74,7 +74,7 @@ namespace CName.PName.SName
             {
                 options.IsEnabled = MultiTenancyConsts.IsEnabled;
             });
-
+#if DEBUG
             if (hostingEnvironment.IsDevelopment())
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
@@ -85,7 +85,7 @@ namespace CName.PName.SName
                     options.FileSets.ReplaceEmbeddedByPhysical<SNameApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}CName.PName.SName.Application", Path.DirectorySeparatorChar)));
                 });
             }
-
+#endif
             context.Services.AddSwaggerGen(
                 options =>
                 {

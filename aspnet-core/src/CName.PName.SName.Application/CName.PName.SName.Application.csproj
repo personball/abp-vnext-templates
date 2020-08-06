@@ -11,6 +11,10 @@
     <DocumentationFile>D:\Github\abp-vnext-templates\aspnet-core\src\CName.PName.SName.Application\CName.PName.SName.Application.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Github\abp-vnext-templates\aspnet-core\src\CName.PName.SName.Application\CName.PName.SName.Application.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
