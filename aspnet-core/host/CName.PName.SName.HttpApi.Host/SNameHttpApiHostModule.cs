@@ -226,7 +226,7 @@ namespace CName.PName.SName
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint($"{PathBase}/swagger/v1/swagger.json", "Support APP API");
+                options.SwaggerEndpoint($"/{PathBase}/swagger/v1/swagger.json", "Support APP API");
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
