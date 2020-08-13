@@ -16,6 +16,7 @@ namespace CName.PName.SName.EntityFrameworkCore
                 /* Add custom repositories here. Example:
                  * options.AddRepository<Question, EfCoreQuestionRepository>();
                  */
+                options.AddDefaultRepositories<SNameDbContext>();
             });
         }
     }
