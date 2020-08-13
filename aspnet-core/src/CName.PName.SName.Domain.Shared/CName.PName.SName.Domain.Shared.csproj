@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Github\abp-vnext-templates\aspnet-core\src\CName.PName.SName.Domain.Shared\CName.PName.SName.Domain.Shared.xml</DocumentationFile>
+    <DocumentationFile>.\CName.PName.SName.Domain.Shared.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\Github\abp-vnext-templates\aspnet-core\src\CName.PName.SName.Domain.Shared\CName.PName.SName.Domain.Shared.xml</DocumentationFile>
+    <DocumentationFile>.\CName.PName.SName.Domain.Shared.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

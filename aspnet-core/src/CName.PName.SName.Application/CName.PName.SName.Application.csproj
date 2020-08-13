@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Github\abp-vnext-templates\aspnet-core\src\CName.PName.SName.Application\CName.PName.SName.Application.xml</DocumentationFile>
+    <DocumentationFile>.\CName.PName.SName.Application.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\Github\abp-vnext-templates\aspnet-core\src\CName.PName.SName.Application\CName.PName.SName.Application.xml</DocumentationFile>
+    <DocumentationFile>.\CName.PName.SName.Application.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

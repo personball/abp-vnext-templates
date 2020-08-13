@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DangQu.PT.Tenancy.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:DangQu.PT.Tenancy.Employees.Employee">
+            <summary>
+            员工
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Employees.Employee.PositionName">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Employees.Employee.UserInfoSyncDisabled">
+            <summary>
+            是否停止同步个人资料（如果有独立的员工信息编辑入口，则可控制不再从个人中心同步信息）
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Employees.Employee.IsEnabled">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Employees.Employee.IsTenantAdmin">
+            <summary>
+            是否租户主管理员（唯一）
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Employees.EmployeeOrganizationUnit.IsLeader">
+            <summary>
+            部门主管，不唯一
+            </summary>
+        </member>
+        <member name="T:DangQu.PT.Tenancy.Employees.EmployeeRole">
+            <summary>
+            员工角色
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.OrganizationUnits.OrganizationUnit.DisplayOrder">
+            <summary>
+            同一级子部门排序，升序
+            </summary>
+        </member>
+        <member name="T:DangQu.PT.Tenancy.Roles.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Roles.Role.IsDefault">
+            <summary>
+            A default role is automatically assigned to a new user
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Roles.Role.IsStatic">
+            <summary>
+            A static role can not be deleted/renamed
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Roles.Role.IsPublic">
+            <summary>
+            A user can see other user's public roles
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Roles.Role.Group">
+            <summary>
+            所在分组，如果没有，则视为默认分组
+            </summary>
+        </member>
+        <member name="T:DangQu.PT.Tenancy.Roles.RoleGroup">
+            <summary>
+            角色分组
+            </summary>
+        </member>
+        <member name="T:DangQu.PT.Tenancy.Tenants.Tenant">
+            <summary>
+            租户/企业
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Tenants.Tenant.Name">
+            <summary>
+            租户标识，若界面上不体现，则按Id的字符串形式进行初始化
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Tenants.Tenant.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Tenants.Tenant.CompanyLogo">
+            <summary>
+            企业logo
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Tenants.Tenant.CountryRegion">
+            <summary>
+            国家地区
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Tenants.Tenant.Province">
+            <summary>
+            省/州
+            </summary>
+        </member>
+        <member name="P:DangQu.PT.Tenancy.Tenants.Tenant.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+    </members>
+</doc>
