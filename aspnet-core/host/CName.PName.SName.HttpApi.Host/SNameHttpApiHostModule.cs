@@ -91,7 +91,7 @@ namespace CName.PName.SName
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "SName API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
-                    options.CustomSchemaIds(type => type.FullName);
+                    // options.CustomSchemaIds(type => type.FullName);
                     options.ResolveConflictingActions(re => re.First());
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameApplicationContractsModule).Assembly.GetName().Name + ".xml"));
                     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SNameApplicationModule).Assembly.GetName().Name + ".xml"));
