@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DangQu.PT.UserCenter.Domain.Shared</name>
+    </assembly>
+    <members>
+        <member name="F:DangQu.PT.UserCenter.Users.Gender.Female">
+            <summary>
+            女士
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.Users.Gender.Male">
+            <summary>
+            先生
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.Users.Gender.Other">
+            <summary>
+            其他
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeConsts.ValidMinutes">
+            <summary>
+            验证码有效时间，单位分钟
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeConsts.Length">
+            <summary>
+            验证码长度
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeConsts.SendSpanSeconds">
+            <summary>
+            验证码发送间隔时间，单位秒
+            </summary>
+        </member>
+        <member name="T:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeType">
+            <summary>
+            验证码类型
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeType.Phone">
+            <summary>
+            手机验证码
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeType.Email">
+            <summary>
+            邮箱验证码
+            </summary>
+        </member>
+        <member name="T:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeUseType">
+            <summary>
+            验证码用途类型
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeUseType.Register">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeUseType.FindBackPassword">
+            <summary>
+            找回密码
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.VerifyCodes.VerifyCodeUseType.UpdateBind">
+            <summary>
+            修改绑定
+            </summary>
+        </member>
+    </members>
+</doc>

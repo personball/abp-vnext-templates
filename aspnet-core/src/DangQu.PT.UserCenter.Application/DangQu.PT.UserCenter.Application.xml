@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DangQu.PT.UserCenter.Application</name>
+    </assembly>
+    <members>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.SendPhoneVerifyCodeForRegister(System.String)">
+            <summary>
+            TODO 短信需替换实际模板
+            </summary>
+            <param name="phoneNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.SendPhoneVerifyCodeForFindBackPassword(System.String)">
+            <summary>
+             TODO 短信需替换实际模板
+            </summary>
+            <param name="phoneNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.RegisterByPhoneAsync(DangQu.PT.UserCenter.Users.Dto.RegisterByPhoneDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.RegisterByEmailAsync(DangQu.PT.UserCenter.Users.Dto.RegisterByEmailDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.FindBackPasswordByPhoneAsync(DangQu.PT.UserCenter.Users.Dto.FindBackPasswordByPhoneDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.FindBackPasswordByEmailAsync(DangQu.PT.UserCenter.Users.Dto.FindBackPasswordByEmailDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.UpdatePhoneByPhoneAsync(DangQu.PT.UserCenter.Users.Dto.UpdatePhoneByPhoneDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.UpdatePhoneByEmailAsync(DangQu.PT.UserCenter.Users.Dto.UpdatePhoneByEmailDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.UpdateEmailByPhoneAsync(DangQu.PT.UserCenter.Users.Dto.UpdateEmailByPhoneDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.UpdateEmailByEmailAsync(DangQu.PT.UserCenter.Users.Dto.UpdateEmailByEmailDto)">
+            <summary>
+            todo 验证码暂不验证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.Enable(System.Guid)">
+            <summary>
+            启用账号
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.Disable(System.Guid)">
+            <summary>
+            禁用账号
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

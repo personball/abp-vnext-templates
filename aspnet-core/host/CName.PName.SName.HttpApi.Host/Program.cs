@@ -1,7 +1,8 @@
 ﻿using System;
-using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Serilog;
 using Serilog.Events;
 
@@ -45,6 +46,10 @@ namespace CName.PName.SName
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureLogging(config =>
+                    {
+                        config.AddConsole(opt => opt.Format = ConsoleLoggerFormat.Systemd);
+                    });
                 })
                 .UseAutofac()
                 .UseSerilog();
