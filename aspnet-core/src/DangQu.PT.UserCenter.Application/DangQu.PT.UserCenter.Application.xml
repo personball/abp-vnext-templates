@@ -74,14 +74,14 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.Enable(System.Guid)">
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.EnableAsync(System.Guid)">
             <summary>
             启用账号
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.Disable(System.Guid)">
+        <member name="M:DangQu.PT.UserCenter.Users.UserAppService.DisableAsync(System.Guid)">
             <summary>
             禁用账号
             </summary>

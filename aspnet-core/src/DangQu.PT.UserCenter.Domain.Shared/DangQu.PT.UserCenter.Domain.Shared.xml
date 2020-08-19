@@ -4,6 +4,46 @@
         <name>DangQu.PT.UserCenter.Domain.Shared</name>
     </assembly>
     <members>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.ServiceError">
+            <summary>
+            服务异常
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.SendLimit">
+            <summary>
+            发送过于频繁，请稍后再试
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.CodeError">
+            <summary>
+            验证码错误
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.OldPhoneCodeError">
+            <summary>
+            原手机验证码错误
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.NewPhoneCodeError">
+            <summary>
+            新手机验证码错误
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.OldEmailCodeError">
+            <summary>
+            原邮箱验证码错误
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.NewEmailCodeError">
+            <summary>
+            新邮箱验证码错误
+            </summary>
+        </member>
+        <member name="F:DangQu.PT.UserCenter.UserCenterErrorCodes.User.LoginError">
+            <summary>
+            用户名或密码错误
+            </summary>
+        </member>
         <member name="F:DangQu.PT.UserCenter.Users.Gender.Female">
             <summary>
             女士

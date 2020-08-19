@@ -1,9 +1,11 @@
 ﻿using CName.PName.SName.Demos;
 using Microsoft.EntityFrameworkCore;
+using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace CName.PName.SName.EntityFrameworkCore
 {
+    [ConnectionStringName(SNameDbProperties.ConnectionStringName)]
     public class SNameHttpApiHostMigrationsDbContext : AbpDbContext<SNameHttpApiHostMigrationsDbContext>, ISNameDbContext
     {
         public SNameHttpApiHostMigrationsDbContext(DbContextOptions<SNameHttpApiHostMigrationsDbContext> options)

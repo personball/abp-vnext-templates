@@ -276,28 +276,28 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.Enable(System.Guid)">
+        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.EnableAsync(System.Guid)">
             <summary>
             启用账号
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.Disable(System.Guid)">
+        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.DisableAsync(System.Guid)">
             <summary>
             禁用账号
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.List(DangQu.PT.UserCenter.Users.Dto.PagedUserResultRequestDto)">
+        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.GetAllAsync(DangQu.PT.UserCenter.Users.Dto.PagedUserResultRequestDto)">
             <summary>
             用户列表
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.Info(System.Guid)">
+        <member name="M:DangQu.PT.UserCenter.Users.IUserAppService.GetAsync(System.Guid)">
             <summary>
             用户详情
             </summary>

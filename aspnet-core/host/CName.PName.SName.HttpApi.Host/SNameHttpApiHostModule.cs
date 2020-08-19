@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CName.PName.SName.Data;
 using CName.PName.SName.EntityFrameworkCore;
 using CName.PName.SName.MultiTenancy;
 using IdentityModel;
@@ -29,7 +30,6 @@ using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.Security.Claims;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.VirtualFileSystem;
 
 namespace CName.PName.SName
@@ -189,6 +189,12 @@ namespace CName.PName.SName
                         .AllowCredentials();
                 });
             });
+
+            if (hostingEnvironment.IsDevelopment())
+            {
+                // for Auto-Migrate
+                context.Services.AddAbpDbContext<SNameHttpApiHostMigrationsDbContext>();
+            }
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -231,6 +237,16 @@ namespace CName.PName.SName
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
+        }
+
+        public override void OnPostApplicationInitialization(ApplicationInitializationContext context)
+        {
+            var hostEnv = context.GetEnvironment();
+            if (hostEnv.IsDevelopment())
+            {
+                // for Auto-Migrate
+                context.ServiceProvider.GetRequiredService<SNameDbMigrationService>().MigrateAsync().Wait();
+            }
         }
     }
 }
