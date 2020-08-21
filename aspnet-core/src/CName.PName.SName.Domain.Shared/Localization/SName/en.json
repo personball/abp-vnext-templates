@@ -1,7 +1,8 @@
 {
   "culture": "en",
   "texts": {
-    "ManageYourProfile":  "Manage your profile",
-    "SamplePageMessage": "A sample page for the SName module"
+    "ManageYourProfile": "Manage your profile",
+    "SamplePageMessage": "A sample page for the SName module",
+    "SName:4004101": "demo error message"
   }
 }

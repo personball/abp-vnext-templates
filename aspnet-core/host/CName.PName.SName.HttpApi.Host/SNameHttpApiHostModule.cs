@@ -60,7 +60,10 @@ namespace CName.PName.SName
 
             Configure<AbpDbContextOptions>(options =>
             {
-                options.UseNpgsql();
+                options.UseNpgsql(opt =>
+                {
+                    opt.EnableRetryOnFailure(3);
+                });
             });
 
             Configure<AbpAspNetCoreMvcOptions>(options =>

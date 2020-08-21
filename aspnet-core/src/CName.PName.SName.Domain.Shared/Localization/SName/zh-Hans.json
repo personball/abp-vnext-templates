@@ -1,6 +1,7 @@
 {
   "culture": "zh-Hans",
   "texts": {
-    "ManageYourProfile":  "管理个人资料" 
+    "ManageYourProfile": "管理个人资料",
+    "SName:4004101": "demo 错误提示"
   }
 }
