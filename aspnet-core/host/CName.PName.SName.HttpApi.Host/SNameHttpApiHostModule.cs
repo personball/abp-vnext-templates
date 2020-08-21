@@ -62,7 +62,7 @@ namespace CName.PName.SName
             {
                 options.UseNpgsql(opt =>
                 {
-                    opt.EnableRetryOnFailure(3);
+                    opt.EnableRetryOnFailure();
                 });
             });
 
