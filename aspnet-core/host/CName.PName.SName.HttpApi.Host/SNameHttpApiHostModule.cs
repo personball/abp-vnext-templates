@@ -25,6 +25,7 @@ using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.PostgreSql;
+using Volo.Abp.Guids;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
@@ -61,19 +62,22 @@ namespace CName.PName.SName
 
             Configure<AbpClockOptions>(opt => opt.Kind = DateTimeKind.Utc);
 
-            Configure<AbpDbContextOptions>(options =>
-            {
-                options.UseNpgsql(opt =>
-                {
-                    opt.EnableRetryOnFailure();
-                });
-            });
-
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
                 options
                     .ConventionalControllers
                     .Create(typeof(SNameApplicationModule).Assembly);
+            });
+
+            Configure<AbpDbContextOptions>(options =>
+            {
+                options.UseNpgsql();
+                // options.UseNpgsql(opt => opt.EnableRetryOnFailure());
+            });
+
+            Configure<AbpSequentialGuidGeneratorOptions>(options =>
+            {
+                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString;
             });
 
             Configure<AbpMultiTenancyOptions>(options =>
