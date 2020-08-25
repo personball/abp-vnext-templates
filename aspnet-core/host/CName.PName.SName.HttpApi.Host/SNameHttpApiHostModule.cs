@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using CName.PName.SName.Data;
 using CName.PName.SName.EntityFrameworkCore;
 using CName.PName.SName.MultiTenancy;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
@@ -30,6 +32,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.Reflection;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Timing;
 using Volo.Abp.VirtualFileSystem;
@@ -205,6 +208,20 @@ namespace CName.PName.SName
                 // for Auto-Migrate
                 context.Services.AddAbpDbContext<SNameHttpApiHostMigrationsDbContext>();
             }
+
+            Configure<AbpExceptionHttpStatusCodeOptions>(opt =>
+            {
+                // opt.Map(SNameErrorCodes.DynamicApplications.ManagementPermissionsNotGranted, HttpStatusCode.Forbidden);
+                var codes = ReflectionHelper.GetPublicConstantsRecursively(typeof(SNameErrorCodes)).ToList();
+
+                codes.Remove(SNameErrorCodes.GroupName);
+
+                // codes.Remove(SNameErrorCodes.DynamicApplications.ManagementPermissionsNotGranted);
+                foreach (var code in codes)
+                {
+                    opt.Map(code, HttpStatusCode.BadRequest);
+                }
+            });
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
