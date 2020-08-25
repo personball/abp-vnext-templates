@@ -30,6 +30,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.Security.Claims;
+using Volo.Abp.Timing;
 using Volo.Abp.VirtualFileSystem;
 
 namespace CName.PName.SName
@@ -57,6 +58,8 @@ namespace CName.PName.SName
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
+
+            Configure<AbpClockOptions>(opt => opt.Kind = DateTimeKind.Utc);
 
             Configure<AbpDbContextOptions>(options =>
             {
