@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Abpluz.Abp.Http.Client.SwitchableIdentityClients" Version="1.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="3.0.4" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="3.1.2" />
     <ProjectReference Include="..\..\src\CName.PName.SName.HttpApi.Client\CName.PName.SName.HttpApi.Client.csproj" />
   </ItemGroup>
 

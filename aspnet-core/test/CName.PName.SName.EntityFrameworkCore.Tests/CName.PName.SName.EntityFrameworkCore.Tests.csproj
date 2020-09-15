@@ -16,7 +16,7 @@
     </PackageReference>
     <ProjectReference Include="..\..\src\CName.PName.SName.EntityFrameworkCore\CName.PName.SName.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\CName.PName.SName.TestBase\CName.PName.SName.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="3.0.4" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="3.1.2" />
   </ItemGroup>
 
 </Project>
