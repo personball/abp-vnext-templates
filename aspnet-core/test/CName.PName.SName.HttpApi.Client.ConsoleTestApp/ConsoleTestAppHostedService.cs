@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
 
@@ -14,8 +13,7 @@ namespace CName.PName.SName.HttpApi.Client.ConsoleTestApp
             {
                 application.Initialize();
 
-                var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
-                await demo.RunAsync();
+                await application.RunTests<ClientDemoService>(demo => demo.RunAsync());
 
                 application.Shutdown();
             }

@@ -23,7 +23,7 @@ namespace CName.PName.SName.Samples
             {
                 using (PluzIdentityClientSwitcher.Use("Internal"))
                 {
-                    await _sampleAppService.GetAsync();
+                    await Assert("Call SampleAppService with no auth.", async () => await _sampleAppService.GetAsync());
                 }
             }
         }
