@@ -1,5 +1,4 @@
 ﻿using Abpluz.Abp.Http.Client.IdentityModel;
-using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 
@@ -8,8 +7,7 @@ namespace CName.PName.SName
     [DependsOn(
         typeof(SNameHttpApiClientModule),
         typeof(AbpMultiTenancyModule),
-        typeof(PluzAbpHttpClientIdentityModelModule),
-        typeof(AbpHttpClientIdentityModelModule))]
+        typeof(PluzAbpHttpClientIdentityModelModule))]
     public class SNameConsoleApiClientModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
